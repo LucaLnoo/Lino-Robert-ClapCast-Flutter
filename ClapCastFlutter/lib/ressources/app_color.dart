@@ -6,6 +6,7 @@ class AppColor {
   static const btnSecondary = Color(0xFF812D2D);
   static const appBackground = Color(0xFF05101A);
   static const appContrast = Color(0xFFF4E1D2);
+  static const black = Color(0xFF000000);
 
   // Colors
   static const Color primary = darkBlue;
