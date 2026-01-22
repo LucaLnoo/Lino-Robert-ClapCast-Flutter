@@ -2,6 +2,7 @@ import 'package:clapcastflutter/ressources/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:clapcastflutter/dashboard/presentation/dashboard_screen.dart';
 
+import '../../generated/assets.dart';
 import '../../ressources/app_dimens.dart';
 
 // Navigation Handler
@@ -59,27 +60,80 @@ class NavigationBarFooter extends StatelessWidget {
         const TextStyle(color: AppColor.appContrast, fontSize: AppText.medium_12),
       ),
 
-      destinations: const [
+      destinations: [
         NavigationDestination(
-            icon: Icon(Icons.movie, color: AppColor.appContrast),
-            label: 'Explore',
-            selectedIcon: Icon(Icons.movie, color: Colors.black),
+          icon: Image.asset(
+            Assets.assetsIcMovie,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.appContrast,
+          ),
+
+          selectedIcon: Image.asset(
+            Assets.assetsIcMovie,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.black,
+          ),
+
+          label: 'Explore',
         ),
+
         NavigationDestination(
-            icon: Icon(Icons.manage_search, color: AppColor.appContrast),
-            label: 'Search',
-            selectedIcon: Icon(Icons.manage_search, color: Colors.black),
+          icon: Image.asset(
+            Assets.assetsIcActionKey,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.appContrast,
+          ),
+
+          selectedIcon: Image.asset(
+            Assets.assetsIcSearch,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.black,
+          ),
+
+          label: 'Search',
         ),
+
         NavigationDestination(
-            icon: Icon(Icons.star, color: AppColor.appContrast),
-            label: 'Favorite',
-            selectedIcon: Icon(Icons.star, color: Colors.black),
+          icon: Image.asset(
+            Assets.assetsIcStarShine,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.appContrast,
+          ),
+
+          selectedIcon: Image.asset(
+            Assets.assetsIcStarShine,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.black,
+          ),
+
+          label: 'Favorite',
         ),
+
         NavigationDestination(
-            icon: Icon(Icons.person, color: AppColor.appContrast),
-            label: 'Profile',
-            selectedIcon: Icon(Icons.person, color: Colors.black),
+          icon: Image.asset(
+            Assets.assetsIcContactsProduct,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.appContrast,
+          ),
+
+          selectedIcon: Image.asset(
+            Assets.assetsIcContactsProduct,
+            width: AppImageSize.medium,
+            height: AppImageSize.medium,
+            color: AppColor.black,
+          ),
+
+          label: 'Profile',
         ),
+
+
       ],
         backgroundColor: AppColor.black,
         indicatorColor: AppColor.appContrast
