@@ -49,7 +49,7 @@ dev_dependencies:
     sdk: flutter
 
   # Json
-  json_serializable: ^6.9.0
+  json_serializable: 6.8.0
   # Build runner
   build_runner: ^2.4.13
   # Retrofit
