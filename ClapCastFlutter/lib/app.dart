@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'dashboard/presentation/dashboard_screen.dart';
-import 'dashboard/presentation/home_page_notifier.dart';
+import 'dashboard/domain/dashboard_notifier.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => HomePageNotifier()),
+        ChangeNotifierProvider(create: (context) => DashboardNotifier()),
       ],
       child: MaterialApp(
         initialRoute: "/",

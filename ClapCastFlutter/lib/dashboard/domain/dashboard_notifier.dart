@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 // Equivalent du ViewModel => notifier peut être uniquement dans le viewmodel
 
-class HomePageNotifier extends ChangeNotifier{
+class DashboardNotifier extends ChangeNotifier{
   var count = 0;
   String get name => _name;
   var _name = "toto";

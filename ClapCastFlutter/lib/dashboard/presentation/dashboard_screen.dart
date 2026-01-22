@@ -2,7 +2,7 @@ import 'package:clapcastflutter/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'home_page_notifier.dart';
+import '../domain/dashboard_notifier.dart';
 
 class DashboardScreen extends StatefulWidget{
   const DashboardScreen({super.key});
@@ -18,14 +18,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((callback){
-      context.read<HomePageNotifier>().getMovies();
+      context.read<DashboardNotifier>().getMovies();
     });
   }
 
   @override
   Widget build(BuildContext context) {
 
-    final homeNotifier = context.watch<HomePageNotifier>();
+    final homeNotifier = context.watch<DashboardNotifier>();
     final movies = homeNotifier.movies;
     var name = homeNotifier.name;
 
