@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
+  // ClapCast colors
+  static const Color btnPrimary = Color(0xFF931F1D);
+  static const btnSecondary = Color(0xFF812D2D);
+  static const appBackground = Color(0xFF05101A);
+  static const appContrast = Color(0xFFF4E1D2);
+
   // Colors
   static const Color primary = darkBlue;
   static const Color surface = lightGrey;
