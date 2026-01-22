@@ -20,7 +20,6 @@ class _MainLayoutState extends State<NavigationBarHandler> {
     const DashboardScreen(),
     const Center(child: Text("Page Search")),
     const Center(child: Text("Page Favorite")),
-    const Center(child: Text("Page Profile")),
   ];
 
   @override
@@ -113,26 +112,7 @@ class NavigationBarFooter extends StatelessWidget {
           ),
 
           label: 'Favorite',
-        ),
-
-        NavigationDestination(
-          icon: Image.asset(
-            Assets.assetsIcContactsProduct,
-            width: AppImageSize.medium,
-            height: AppImageSize.medium,
-            color: AppColor.appContrast,
-          ),
-
-          selectedIcon: Image.asset(
-            Assets.assetsIcContactsProduct,
-            width: AppImageSize.medium,
-            height: AppImageSize.medium,
-            color: AppColor.black,
-          ),
-
-          label: 'Profile',
-        ),
-
+        )
 
       ],
         backgroundColor: AppColor.black,
