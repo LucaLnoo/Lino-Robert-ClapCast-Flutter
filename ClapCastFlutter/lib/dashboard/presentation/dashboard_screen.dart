@@ -34,7 +34,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           appBar: AppBar(),
           body: Column(
             children: [
-              Image.asset(Assets.assetsCapture),
+              Image.asset(Assets.assetsIcLogo),
               Text("Welcome to dashboard screen, i'm $name"),
               FilledButton(
                   onPressed: homeNotifier.changeName,
