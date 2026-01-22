@@ -3,10 +3,17 @@ class Assets {
   Assets._();
 
   static const String assetsCapture = 'assets/Capture.PNG';
-  static const String assetsIcActionKey = 'assets/ic_action_key.svg';
+  static const String assetsIcActionKey = 'assets/ic_action_key.png';
+  static const String assetsIcArrowBack = 'assets/ic_arrow_back.png';
+  static const String assetsIcContactsProduct = 'assets/ic_contacts_product.png';
+  static const String assetsIcFilter = 'assets/ic_filter.png';
+  static const String assetsIcLauncherBackground = 'assets/ic_launcher_background.png';
+  static const String assetsIcLauncherForeground = 'assets/ic_launcher_foreground.png';
   static const String assetsIcLoginLogo = 'assets/ic_login_logo.png';
   static const String assetsIcLogo = 'assets/ic_logo.png';
+  static const String assetsIcMovie = 'assets/ic_movie.png';
   static const String assetsIcPopcorn = 'assets/ic_popcorn.png';
+  static const String assetsIcSearch = 'assets/ic_search.png';
   static const String assetsLoaderClapCast = 'assets/loader_clap_cast.gif';
   static const String assetsNoPicture = 'assets/no_picture.png';
 
