@@ -19,7 +19,6 @@ class _MainLayoutState extends State<NavigationBarHandler> {
   final List<Widget> _pages = [
     const DashboardScreen(),
     const Center(child: Text("Page Search")),
-    const Center(child: Text("Page Favorite")),
   ];
 
   @override
@@ -94,26 +93,7 @@ class NavigationBarFooter extends StatelessWidget {
           ),
 
           label: 'Search',
-        ),
-
-        NavigationDestination(
-          icon: Image.asset(
-            Assets.assetsIcStarShine,
-            width: AppImageSize.medium,
-            height: AppImageSize.medium,
-            color: AppColor.appContrast,
-          ),
-
-          selectedIcon: Image.asset(
-            Assets.assetsIcStarShine,
-            width: AppImageSize.medium,
-            height: AppImageSize.medium,
-            color: AppColor.black,
-          ),
-
-          label: 'Favorite',
         )
-
       ],
         backgroundColor: AppColor.black,
         indicatorColor: AppColor.appContrast
