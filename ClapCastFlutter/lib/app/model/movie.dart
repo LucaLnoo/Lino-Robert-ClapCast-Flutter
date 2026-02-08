@@ -25,4 +25,12 @@ class Movies {
   Map<String, dynamic> toJson() => _$MoviesToJson(this);
 }
 
+class MovieDetails{
+
+}
+
+class MovieDistribution{
+
+}
+
 //data class Movies(@SerializedName("results") val movieList: List<MovieOverview>)
