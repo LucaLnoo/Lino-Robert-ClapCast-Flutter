@@ -51,6 +51,19 @@ class MovieOverview{
     this.releaseDate,
     this.posterPathImage,
   });
+
+  int? get releaseYear {
+    if (releaseDate == null || releaseDate!.isEmpty) {
+      return null;
+    }
+    try {
+      final parts = releaseDate!.split("-");
+      final yearString = parts.first.trim();
+      return int.tryParse(yearString);
+    } catch (e) {
+      return null;
+    }
+  }
   
   factory MovieOverview.fromJson(Map<String, dynamic> json) => _$MovieOverviewFromJson(json);
   Map<String, dynamic> toJson() => _$MovieOverviewToJson(this);
