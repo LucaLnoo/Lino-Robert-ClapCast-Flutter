@@ -5,6 +5,20 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.g.dart';
 
+// --- MOVIE LIST -- //
+@JsonSerializable(explicitToJson: true)
+class Movies {
+  @JsonKey(name: "results")
+  final List<MovieOverview> movieList;
+
+  Movies(this.movieList);
+
+  factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
+  Map<String, dynamic> toJson() => _$MoviesToJson(this);
+}
+
+
+// --- MOVIE OVERVIEW -- //
 @JsonSerializable(explicitToJson: true)
 class MovieOverview{
   @JsonKey(name:"id")
@@ -42,23 +56,48 @@ class MovieOverview{
   Map<String, dynamic> toJson() => _$MovieOverviewToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class Movies {
-  @JsonKey(name: "results")
-  final List<MovieOverview> movieList;
 
-  Movies(this.movieList);
-
-  factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
-  Map<String, dynamic> toJson() => _$MoviesToJson(this);
-}
-
+// --- MOVIE DETAILS -- //
 @JsonSerializable(explicitToJson: true)
 class MovieDetails{
   @JsonKey(name:"id")
   final int id;
 
-  MovieDetails({required this.id});
+  @JsonKey(name: "original_title")
+  final String? title;
+
+  @JsonKey(name: "original_language")
+  final String? language;
+
+  @JsonKey(name: "overview")
+  final String? overview;
+
+  @JsonKey(name: "release_date")
+  final String? releaseDate;
+
+  @JsonKey(name: "vote_average")
+  final Float? score;
+
+  @JsonKey(name: "popularity")
+  final Float? popularityRate;
+
+  @JsonKey(name: "poster_path")
+  final String? posterPathImage;
+
+  @JsonKey(name: "distribution_details")
+  final MovieDistribution? distribution;
+
+  MovieDetails({
+    required this.id,
+    this.title,
+    this.language,
+    this.overview,
+    this.releaseDate,
+    this.score,
+    this.popularityRate,
+    this.posterPathImage,
+    this.distribution,
+  });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) => _$MovieDetailsFromJson(json);
   Map<String, dynamic> toJson() => _$MovieDetailsToJson(this);
