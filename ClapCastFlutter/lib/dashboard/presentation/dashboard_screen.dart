@@ -2,6 +2,7 @@ import 'package:clapcastflutter/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../app/widgets/background.dart';
 import '../domain/dashboard_notifier.dart';
 
 class DashboardScreen extends StatefulWidget{
@@ -29,21 +30,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final movies = homeNotifier.movies;
     var name = homeNotifier.name;
 
-    return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(),
-          body: Column(
+    return AppMenuBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+
+        body: SafeArea(
+          child: Column(
             children: [
               Image.asset(Assets.assetsIcLogo),
               Text("Welcome to dashboard screen, i'm $name"),
               FilledButton(
                   onPressed: homeNotifier.changeName,
-                  child: Text("changer le nom")
+                  child: const Text("changer le nom")
               ),
             ],
           ),
-          bottomNavigationBar: Text(movies?.first.title ?? "no name"),
-        )
+        ),
+
+        bottomNavigationBar: Text(movies?.first.title ?? "no name"),
+      ),
     );
   }
 }
