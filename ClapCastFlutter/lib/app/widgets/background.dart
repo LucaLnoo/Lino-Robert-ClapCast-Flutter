@@ -5,6 +5,7 @@ class AppMenuBackground extends StatelessWidget{
   final Widget child;
 
   const AppMenuBackground({
+    // key allow to give a name to the widget and can be used to identify it
     super.key,
     required this.child,
   });
