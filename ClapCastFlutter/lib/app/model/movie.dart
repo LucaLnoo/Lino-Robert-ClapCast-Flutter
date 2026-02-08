@@ -108,10 +108,53 @@ class MovieDistribution{
   @JsonKey(name:"id")
   final int id;
 
-  MovieDistribution({required this.id});
+  @JsonKey(name:"crew",defaultValue: [])
+  final List<CrewMember> crew;
+
+  @JsonKey(name:"cast",defaultValue: [])
+  final List<CastMember> cast;
+
+  MovieDistribution({
+    required this.id,
+    this.crew = const [],
+    this.cast = const [],
+  });
 
   factory MovieDistribution.fromJson(Map<String, dynamic> json) => _$MovieDistributionFromJson(json);
   Map<String, dynamic> toJson() => _$MovieDistributionToJson(this);
+}
+
+@JsonSerializable()
+class CastMember {
+  @JsonKey(name: "id")
+  final int personId;
+
+  @JsonKey(name: "cast_id")
+  final int castId;
+
+  @JsonKey(name: "character")
+  final String? characterName;
+
+  @JsonKey(name: "name")
+  final String actorName;
+
+  @JsonKey(name: "profile_path")
+  final String? profilePathImage;
+
+  @JsonKey(name: "popularity")
+  final double? popularityRate;
+
+  const CastMember({
+    required this.personId,
+    required this.castId,
+    required this.actorName,
+    this.characterName,
+    this.profilePathImage,
+    this.popularityRate,
+  });
+
+  factory CastMember.fromJson(Map<String, dynamic> json) => _$CastMemberFromJson(json);
+  Map<String, dynamic> toJson() => _$CastMemberToJson(this);
 }
 
 
