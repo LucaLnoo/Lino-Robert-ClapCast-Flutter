@@ -25,12 +25,24 @@ class Movies {
   Map<String, dynamic> toJson() => _$MoviesToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true)
 class MovieDetails{
+  @JsonKey(name:"id")
+  final int id;
 
+  MovieDetails({required this.id});
+
+  factory MovieDetails.fromJson(Map<String, dynamic> json) => _$MovieDetailsFromJson(json);
+  Map<String, dynamic> toJson() => _$MovieDetailsToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true)
 class MovieDistribution{
+  @JsonKey(name:"id")
+  final int id;
 
+  MovieDistribution({required this.id});
+
+  factory MovieDistribution.fromJson(Map<String, dynamic> json) => _$MovieDistributionFromJson(json);
+  Map<String, dynamic> toJson() => _$MovieDistributionToJson(this);
 }
-
-//data class Movies(@SerializedName("results") val movieList: List<MovieOverview>)

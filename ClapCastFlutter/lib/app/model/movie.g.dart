@@ -25,3 +25,22 @@ Movies _$MoviesFromJson(Map<String, dynamic> json) => Movies(
 Map<String, dynamic> _$MoviesToJson(Movies instance) => <String, dynamic>{
       'results': instance.movieList.map((e) => e.toJson()).toList(),
     };
+
+MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
+      id: (json['id'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+MovieDistribution _$MovieDistributionFromJson(Map<String, dynamic> json) =>
+    MovieDistribution(
+      id: (json['id'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$MovieDistributionToJson(MovieDistribution instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
