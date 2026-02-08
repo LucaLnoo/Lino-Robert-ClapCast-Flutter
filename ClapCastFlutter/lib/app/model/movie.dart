@@ -1,14 +1,42 @@
 
+import 'dart:ffi';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class MovieOverview{
-  @JsonKey(name: "title") // Utile si nom diff
+  @JsonKey(name:"id")
+  final int id;
+
+  @JsonKey(name: "original_title") // Utile si nom diff
   final String? title;
 
-  MovieOverview({this.title});
+  @JsonKey(name: "original_language")
+  final String? language;
+
+  @JsonKey(name: "popularity")
+  final Float? popularityRate;
+
+  @JsonKey(name: "vote_average")
+  final Float? score;
+
+  @JsonKey(name: "release_date")
+  final String? releaseDate;
+
+  @JsonKey(name: "poster_path")
+  final String? posterPathImage;
+
+  MovieOverview({
+    required this.id,
+    this.title,
+    this.language,
+    this.popularityRate,
+    this.score,
+    this.releaseDate,
+    this.posterPathImage,
+  });
   
   factory MovieOverview.fromJson(Map<String, dynamic> json) => _$MovieOverviewFromJson(json);
   Map<String, dynamic> toJson() => _$MovieOverviewToJson(this);
