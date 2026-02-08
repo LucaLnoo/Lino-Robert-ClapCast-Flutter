@@ -21,8 +21,8 @@ class DashboardNotifier extends ChangeNotifier{
   }
 
   void getMovies() async {
-      final movies = await movieRepository.getMovies();
-      this.movies = movies.movieList;
+      final movies = await movieRepository.getMoviesOverview();
+      this.movies = movies;
       notifyListeners();
   }
 }

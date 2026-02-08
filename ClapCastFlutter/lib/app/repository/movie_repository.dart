@@ -6,7 +6,7 @@ final movieRepository = _MovieRepository();
 
 class _MovieRepository {
 
-  Future<List<MovieOverview>> getMoviesOverview(String? title) async {
+  Future<List<MovieOverview>> getMoviesOverview({String? title}) async {
     try{
       List<MovieOverview> movies = [];
       const int pageRange = 20;
