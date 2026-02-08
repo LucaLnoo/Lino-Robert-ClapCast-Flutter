@@ -28,5 +28,31 @@ class _MovieRepository {
     }
   }
 
+  Future<MovieDetails> getMovieDetails(int movieId) async {
+    try{
+      var movie = await apiCinema.movieService.getMovieDetails(movieId);
+      var distribution = await apiCinema.movieService.getMovieCredits(movieId);
+      movie = _mergeDetailsAndCredits(movie,distribution);
+      return movie;
+    }catch(error){
+      throw Exception( error);
+    }
+  }
+
+
+    MovieDetails _mergeDetailsAndCredits(MovieDetails original, MovieDistribution distribution) {
+    return MovieDetails(
+      id: original.id,
+      title: original.title,
+      overview: original.overview,
+      posterPathImage: original.posterPathImage,
+      releaseDate: original.releaseDate,
+      score: original.score,
+      popularityRate: original.popularityRate,
+      language: original.language,
+
+      distribution: distribution,
+    );
+  }
 
 }
