@@ -31,10 +31,10 @@ class MovieOverview{
   final String? language;
 
   @JsonKey(name: "popularity")
-  final Float? popularityRate;
+  final double? popularityRate;
 
   @JsonKey(name: "vote_average")
-  final Float? score;
+  final double? score;
 
   @JsonKey(name: "release_date")
   final String? releaseDate;
@@ -76,10 +76,10 @@ class MovieDetails{
   final String? releaseDate;
 
   @JsonKey(name: "vote_average")
-  final Float? score;
+  final double? score;
 
   @JsonKey(name: "popularity")
-  final Float? popularityRate;
+  final double? popularityRate;
 
   @JsonKey(name: "poster_path")
   final String? posterPathImage;
@@ -112,4 +112,38 @@ class MovieDistribution{
 
   factory MovieDistribution.fromJson(Map<String, dynamic> json) => _$MovieDistributionFromJson(json);
   Map<String, dynamic> toJson() => _$MovieDistributionToJson(this);
+}
+
+
+@JsonSerializable()
+class CrewMember {
+  @JsonKey(name: "id")
+  final int personId;
+
+  @JsonKey(name: "credit_id")
+  final String creditId;
+
+  @JsonKey(name: "job")
+  final String job;
+
+  @JsonKey(name: "name")
+  final String crewName;
+
+  @JsonKey(name: "profile_path")
+  final String? profilePathImage;
+
+  @JsonKey(name: "popularity")
+  final double? popularityRate;
+
+  const CrewMember({
+    required this.personId,
+    required this.creditId,
+    required this.job,
+    required this.crewName,
+    this.profilePathImage,
+    this.popularityRate,
+  });
+
+  factory CrewMember.fromJson(Map<String, dynamic> json) => _$CrewMemberFromJson(json);
+  Map<String, dynamic> toJson() => _$CrewMemberToJson(this);
 }
