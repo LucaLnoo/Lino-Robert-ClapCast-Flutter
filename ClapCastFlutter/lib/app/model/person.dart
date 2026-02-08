@@ -78,3 +78,56 @@ class PersonFilmography{
   factory PersonFilmography.fromJson(Map<String, dynamic> json) => _$PersonFilmographyFromJson(json);
   Map<String, dynamic> toJson() => _$PersonFilmographyToJson(this);
 }
+
+
+// --- PERSON DETAILS -- //
+@JsonSerializable(explicitToJson: true)
+class PersonDetails{
+  @JsonKey(name:"id")
+  final int id;
+
+  @JsonKey(name: "name")
+  final String? name;
+
+  @JsonKey(name: "known_for_department")
+  final String? department;
+
+  @JsonKey(name: "biography")
+  final String? biography;
+
+  @JsonKey(name: "birthday")
+  final String? birthday;
+
+  @JsonKey(name: "place_of_birth")
+  final String? placeOfBirth;
+
+  @JsonKey(name: "popularity")
+  final double? popularityRate;
+
+  @JsonKey(name: "profile_path")
+  final String? profilePathImage;
+
+  @JsonKey(includeFromJson: false, includeToJson: true)
+  final PersonFilmography? knownForMovies;
+
+  PersonDetails({
+    required this.id,
+    this.name,
+    this.department,
+    this.biography,
+    this.birthday,
+    this.placeOfBirth,
+    this.popularityRate,
+    this.profilePathImage,
+    this.knownForMovies,
+  });
+
+  String? get country {
+    if (placeOfBirth == null) return null;
+    final parts = placeOfBirth!.split(",");
+    return parts.last.trim();
+  }
+
+  factory PersonDetails.fromJson(Map<String, dynamic> json) => _$PersonDetailsFromJson(json);
+  Map<String, dynamic> toJson() => _$PersonDetailsToJson(this);
+}
