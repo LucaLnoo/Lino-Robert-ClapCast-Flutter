@@ -73,13 +73,13 @@ class _MovieService implements MovieService {
   }
 
   @override
-  Future<PersonDetails> getMovieDetails(int movieId) async {
+  Future<MovieDetails> getMovieDetails(int movieId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<PersonDetails>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieDetails>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -95,18 +95,18 @@ class _MovieService implements MovieService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PersonDetails.fromJson(_result.data!);
+    final value = MovieDetails.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<PersonFilmography> getMovieCredits(int movieId) async {
+  Future<MovieDistribution> getMovieCredits(int movieId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<PersonFilmography>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieDistribution>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -122,7 +122,7 @@ class _MovieService implements MovieService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PersonFilmography.fromJson(_result.data!);
+    final value = MovieDistribution.fromJson(_result.data!);
     return value;
   }
 
@@ -224,13 +224,13 @@ class _ActorService implements ActorService {
   }
 
   @override
-  Future<MovieDetails> getPersonDetails(int movieId) async {
+  Future<PersonDetails> getPersonDetails(int movieId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieDetails>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<PersonDetails>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -246,18 +246,18 @@ class _ActorService implements ActorService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MovieDetails.fromJson(_result.data!);
+    final value = PersonDetails.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<MovieDistribution> getPersonMovieCredits(int movieId) async {
+  Future<PersonFilmography> getPersonMovieCredits(int movieId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieDistribution>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<PersonFilmography>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -273,7 +273,7 @@ class _ActorService implements ActorService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MovieDistribution.fromJson(_result.data!);
+    final value = PersonFilmography.fromJson(_result.data!);
     return value;
   }
 

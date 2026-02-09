@@ -19,10 +19,10 @@ abstract class MovieService {
   Future<Movies> searchMovies(@Query("query") String query);
   
   @GET("movie/{movie_id}")
-  Future<PersonDetails> getMovieDetails(@Path("movie_id") int movieId);
+  Future<MovieDetails> getMovieDetails(@Path("movie_id") int movieId);
 
   @GET("movie/{movie_id}/credits")
-  Future<PersonFilmography> getMovieCredits(@Path("movie_id") int movieId);
+  Future<MovieDistribution> getMovieCredits(@Path("movie_id") int movieId);
 }
 
 @RestApi()
@@ -36,8 +36,8 @@ abstract class ActorService {
   Future<PeopleOverview> searchPeopleOverview(@Query("query") String query);
 
   @GET("person/{person_id}")
-  Future<MovieDetails> getPersonDetails(@Path("movie_id") int movieId);
+  Future<PersonDetails> getPersonDetails(@Path("movie_id") int movieId);
 
   @GET("person/{person_id}/movie_credits")
-  Future<MovieDistribution> getPersonMovieCredits(@Path("movie_id") int movieId);
+  Future<PersonFilmography> getPersonMovieCredits(@Path("movie_id") int movieId);
 }

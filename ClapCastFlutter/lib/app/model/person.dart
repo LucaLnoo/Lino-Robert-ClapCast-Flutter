@@ -12,8 +12,8 @@ class PeopleOverview {
 
   PeopleOverview(this.personList);
 
-  factory PeopleOverview.fromJson(Map<String, dynamic> json) => _$PeopleFromJson(json);
-  Map<String, dynamic> toJson() => _$PeopleToJson(this);
+  factory PeopleOverview.fromJson(Map<String, dynamic> json) => _$PeopleOverviewFromJson(json);
+  Map<String, dynamic> toJson() => _$PeopleOverviewToJson(this);
 }
 
 // --- PERSON OVERVIEW -- //
