@@ -6,13 +6,13 @@ part 'person.g.dart';
 
 // --- Person LIST -- //
 @JsonSerializable(explicitToJson: true)
-class People {
+class PeopleOverview {
   @JsonKey(name: "results")
   final List<PersonOverview> personList;
 
-  People(this.personList);
+  PeopleOverview(this.personList);
 
-  factory People.fromJson(Map<String, dynamic> json) => _$PeopleFromJson(json);
+  factory PeopleOverview.fromJson(Map<String, dynamic> json) => _$PeopleFromJson(json);
   Map<String, dynamic> toJson() => _$PeopleToJson(this);
 }
 

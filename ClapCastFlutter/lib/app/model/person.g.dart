@@ -6,13 +6,15 @@ part of 'person.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-People _$PeopleFromJson(Map<String, dynamic> json) => People(
+PeopleOverview _$PeopleOverviewFromJson(Map<String, dynamic> json) =>
+    PeopleOverview(
       (json['results'] as List<dynamic>)
           .map((e) => PersonOverview.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$PeopleToJson(People instance) => <String, dynamic>{
+Map<String, dynamic> _$PeopleOverviewToJson(PeopleOverview instance) =>
+    <String, dynamic>{
       'results': instance.personList.map((e) => e.toJson()).toList(),
     };
 
