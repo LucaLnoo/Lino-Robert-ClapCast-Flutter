@@ -1,7 +1,10 @@
 import 'package:clapcastflutter/app/api/api.dart';
 import 'package:clapcastflutter/app/model/movie.dart';
+import 'package:clapcastflutter/app/model/person.dart';
 import 'package:clapcastflutter/app/repository/movie_repository.dart';
 import 'package:flutter/material.dart';
+
+import '../../app/repository/person_repository.dart';
 
 // Equivalent du ViewModel => notifier peut être uniquement dans le viewmodel
 
@@ -10,6 +13,7 @@ class DashboardNotifier extends ChangeNotifier{
   String get name => _name;
   var _name = "toto";
   List<MovieOverview>? movies;
+  List<PersonOverview>? people;
 
   void changeName() {
     if(_name == "toto"){
@@ -24,5 +28,11 @@ class DashboardNotifier extends ChangeNotifier{
       final movies = await movieRepository.getMoviesOverview();
       this.movies = movies;
       notifyListeners();
+  }
+
+  void getPeople() async{
+    final people = await personRepository.getPeopleOverview();
+    this.people = people;
+    notifyListeners();
   }
 }

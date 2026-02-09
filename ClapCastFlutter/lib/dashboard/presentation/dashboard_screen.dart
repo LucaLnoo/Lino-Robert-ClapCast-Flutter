@@ -1,8 +1,10 @@
 import 'package:clapcastflutter/generated/assets.dart';
+import 'package:clapcastflutter/ressources/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../app/widgets/background.dart';
+import '../../ressources/app_dimens.dart';
 import '../domain/dashboard_notifier.dart';
 
 class DashboardScreen extends StatefulWidget{
@@ -20,6 +22,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((callback){
       context.read<DashboardNotifier>().getMovies();
+      context.read<DashboardNotifier>().getPeople();
     });
   }
 
@@ -28,6 +31,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     final homeNotifier = context.watch<DashboardNotifier>();
     final movies = homeNotifier.movies;
+    final people = homeNotifier.people;
     var name = homeNotifier.name;
 
     return AppMenuBackground(
@@ -52,7 +56,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
 
-        bottomNavigationBar: Text(movies?.first.title ?? "no name"),
+        bottomNavigationBar:
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "First Movie : ${movies?.isNotEmpty == true ? movies!.first.title : 'No movie data'}",
+                  style: TextStyle(
+                    color: AppColor.appContrast,
+                    fontSize: AppText.medium_12,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                Text(
+                  "Actor : ${people?.isNotEmpty == true ? people!.first.name : 'No actor data'}",
+                  style: TextStyle(
+                    color: AppColor.appContrast,
+                    fontSize: AppText.medium_12,
+                  ),
+                ),
+              ],
+            )
       ),
     );
   }
