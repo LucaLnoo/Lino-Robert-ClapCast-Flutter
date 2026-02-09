@@ -10,6 +10,7 @@ class Api{
   late final Dio _dio;
 
   late final MovieService movieService;
+  late final ActorService actorService;
 
   // Singleton
   static final Api _instance = Api._internal();
@@ -37,5 +38,6 @@ class Api{
     ));
 
     movieService = MovieService(_dio);
+    actorService = ActorService(_dio);
   }
 }
