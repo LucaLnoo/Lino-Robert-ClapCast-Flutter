@@ -26,12 +26,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final homeNotifier = context.watch<StartingNotifier>();
-    final movies = homeNotifier.movies;
-    final people = homeNotifier.people;
+    final startingNotifier = context.watch<StartingNotifier>();
+    final movies = startingNotifier.movies;
+    final people = startingNotifier.people;
 
-    return AppMenuBackground(
-      child: Scaffold()
+    if (movies != null && people != null) {
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // pushReplacementNamed pour qu'on ne puisse pas revenir au Splash avec "Retour"
+        Navigator.of(context).pushReplacementNamed("/dashboard_screen");
+      });
+    }
+
+    return AppLoginBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      )
     );
   }
 }

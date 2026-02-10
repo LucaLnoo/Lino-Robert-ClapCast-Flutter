@@ -1,5 +1,7 @@
 import 'package:clapcastflutter/ressources/app_color.dart';
 import 'package:clapcastflutter/ressources/app_theme.dart';
+import 'package:clapcastflutter/starting/domain/starting_notifier.dart';
+import 'package:clapcastflutter/starting/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,12 +18,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DashboardNotifier()),
+        ChangeNotifierProvider(create: (context) => StartingNotifier()),
       ],
       child: MaterialApp(
         initialRoute: "/",
         routes: {
-          "/": (context) => const NavigationBarHandler(),
-          "/dashboard_screen": (context) => DashboardScreen(),
+          "/": (context) => const SplashScreen(),
+          "/dashboard_screen": (context) => const DashboardScreen(),
+          //"/search_screen": (context) => const SearchScreen(),
         },
         title: 'Flutter Demo',
         theme: AppTheme.themeData,

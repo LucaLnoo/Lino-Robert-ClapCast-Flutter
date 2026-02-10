@@ -34,7 +34,7 @@ class BaseLayout extends StatelessWidget {
       body: child,
       bottomNavigationBar: NavigationBarFooter(
         selectedIndex: currentIndex,
-        onDestinationSelected: (index) => _onItemTapped(context, index),
+        newDestinationSelected: (index) => _onItemTapped(context, index),
       ),
     );
   }
