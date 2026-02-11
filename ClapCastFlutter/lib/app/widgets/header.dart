@@ -91,15 +91,20 @@ class SectionBar extends StatelessWidget {
 }
 
 class SearchBarWidget extends StatefulWidget {
-  final String query; // La valeur initiale
-  final ValueChanged<String> onQueryChange; // Callback quand ça change
-  final VoidCallback onSearchClick; // Callback quand on clique sur la loupe
+  final String query;
+  final ValueChanged<String> onQueryChange;
+  final VoidCallback onSearchClick;
+
+  final ValueChanged<bool> onFilterToggle;
+  final bool isFilterOpen;
 
   const SearchBarWidget({
     super.key,
     required this.query,
     required this.onQueryChange,
     required this.onSearchClick,
+    required this.onFilterToggle,
+    required this.isFilterOpen,
   });
 
   @override
@@ -108,7 +113,6 @@ class SearchBarWidget extends StatefulWidget {
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
   late TextEditingController _controller;
-  bool showFilter = false;
 
   @override
   void initState() {
@@ -136,53 +140,76 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: AppMargin.medium, vertical: AppMargin.small),
-      child: Column(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(
-                  height: 55.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF2A2A2A),
-                    borderRadius: BorderRadius.circular(AppRadius.large),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _controller,
-                          onChanged: widget.onQueryChange,
-                          onSubmitted: (_) => widget.onSearchClick(),
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                            hintText: "Rechercher...",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16.0),
-                          ),
-                          cursorColor: Colors.white,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: widget.onSearchClick,
-                        icon: Image.asset(
-                          Assets.assetsIcSearch,
-                          color: AppColor.appContrast,
-                          width: 24,
-                          height: 24,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+          Expanded(
+            child: Container(
+              height: 55.0,
+              decoration: BoxDecoration(
+                color: const Color(0xFF2A2A2A),
+                borderRadius: BorderRadius.circular(AppRadius.large),
               ),
-              if (showFilter)
-              // TODO Integrer FilterWidget ici et passer les parametres
-                Container(height: 50, color: Colors.transparent)
-            ],
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      onChanged: widget.onQueryChange,
+                      onSubmitted: (_) => widget.onSearchClick(),
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        hintText: "Rechercher...",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      ),
+                      cursorColor: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: widget.onSearchClick,
+                    icon: Image.asset(
+                      Assets.assetsIcSearch,
+                      color: AppColor.appContrast,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(width: 8.0),
+
+          GestureDetector(
+            onTap: () {
+              widget.onFilterToggle(!widget.isFilterOpen);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    Assets.assetsIcFilter,
+                    color: AppColor.appContrast,
+                    width: 24,
+                    height: 24,
+                  ),
+                  const SizedBox(height: 2),
+                  const Text(
+                    "Filtre",
+                    style: TextStyle(
+                        color: AppColor.appContrast,
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -202,7 +229,7 @@ class NavigationBarHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabs = ["Acteurs", "Films"]; // TODO Utiliser localization
+    final tabs = ["Acteurs", "Films"];
 
     return Container(
       width: double.infinity,
