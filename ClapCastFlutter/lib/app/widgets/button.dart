@@ -16,53 +16,39 @@ class MediaCardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. On définit une largeur fixe pour toute la carte
-    return SizedBox(
-      width: 120.0,
-      // Pas de height fixe ici pour éviter les dépassements si le texte est long,
-      // on laisse la Column gérer la hauteur verticale.
+    // GestureDetector allow to intercept tactil touch
+    return GestureDetector(
+      onTap: onClick,
       child: Column(
-        mainAxisSize: MainAxisSize.min, // Prend le minimum de place nécessaire
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
-          // 2. L'image (Partie cliquable principale)
           Material(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(12.0),
-            clipBehavior: Clip.hardEdge, // Coupe l'image si elle dépasse les bords arrondis
-            child: InkWell(
-              onTap: onClick,
-              child: SizedBox(
-                height: 160.0, // HAUTEUR FIXE pour l'image
-                width: double.infinity, // Prend toute la largeur du parent (120.0)
-                child: ImageApi(
-                  imagePath: imagePath,
-                  width: 500, // Résolution de l'image demandée à l'API
-                  // Assure-toi que ton widget ImageApi gère bien le BoxFit.cover
-                  // Si ImageApi est juste un wrapper, il doit remplir ce SizedBox
-                ),
+            clipBehavior: Clip.hardEdge,
+            child: SizedBox(
+              height: 130.0,
+              width: double.infinity,
+              child: ImageApi(
+                imagePath: imagePath,
+                width: 500,
               ),
             ),
           ),
 
-          const SizedBox(height: 8.0), // Espace entre image et texte
+          const SizedBox(height: 6.0),
 
-          // 3. Le Texte (Partie descriptive)
-          // On le sort du InkWell pour que le clic sur le texte soit optionnel,
-          // ou on peut englober tout le widget dans un GestureDetector si tu préfères.
-          GestureDetector(
-            onTap: onClick,
-            child: Text(
-              text,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 13.0, // Un peu plus petit pour bien tenir
-                fontWeight: FontWeight.w500,
-              ),
+          Text(
+            text,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            // Add "..." at the end of the text if it overflows
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12.0,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],
