@@ -5,9 +5,7 @@ import 'package:clapcastflutter/starting/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'app/widgets/navigation_bar.dart';
 import 'dashboard/presentation/dashboard_screen.dart';
-import 'dashboard/domain/dashboard_notifier.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,7 +15,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => DashboardNotifier()),
         ChangeNotifierProvider(create: (context) => StartingNotifier()),
       ],
       child: MaterialApp(
