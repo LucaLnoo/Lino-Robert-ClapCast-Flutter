@@ -7,6 +7,7 @@ import '../../app/model/person.dart';
 import '../../app/widgets/ContentScrollRow.dart';
 import '../../app/widgets/base_layout.dart';
 import '../../app/widgets/background.dart';
+import '../../detailed/presentation/detailed_screen.dart';
 import '../../search/presentation/category_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -114,7 +115,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   void _navigateToDetail(int id, bool isPerson) {
-    // Navigator.pushNamed(context, '/detail', arguments: {'id': id, 'isPerson': isPerson});
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailedScreen(
+          contentId: id,
+          isAPerson: isPerson,
+        ),
+      ),
+    );
   }
 
   void _navigateToCategory(String title, {required List<PersonOverview> people, required List<MovieOverview> movies}) {
