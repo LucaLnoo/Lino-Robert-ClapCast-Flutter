@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'dashboard/presentation/dashboard_screen.dart';
+import 'detailed/presentation/detailed_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           "/dashboard_screen": (context) => const DashboardScreen(),
           "/search_screen": (context) => const SearchScreen(),
           "/category_screen": (context) => const CategoryScreen(people: [], movies: [], categoryTitle: '',),
+          "/detail_screen": (context) => const DetailedScreen(),
         },
         title: 'Flutter Demo',
         theme: AppTheme.themeData,
