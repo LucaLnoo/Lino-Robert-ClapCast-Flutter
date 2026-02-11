@@ -1,11 +1,10 @@
 import 'package:clapcastflutter/app/widgets/base_layout.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../app/widgets/background.dart';
-import '../../app/widgets/header.dart';
 import '../../app/widgets/list_item_page.dart';
 import '../domain/search_notifier.dart';
+import '../../dashboard/presentation/dashboard_screen.dart';
 
 class SearchScreen extends StatelessWidget{
   const SearchScreen({super.key});
@@ -33,7 +32,16 @@ class SearchScreen extends StatelessWidget{
           }
         },
 
-        onBackClick: () => Navigator.pop(context),
+        onBackClick: () {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const DashboardScreen()),
+            );
+          }
+        },
 
         onSearchQueryChanged: (query) {
           searchActions.fetchPeopleByQuery(query);
