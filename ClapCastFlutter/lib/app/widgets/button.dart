@@ -16,44 +16,56 @@ class MediaCardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 1. On définit une largeur fixe pour toute la carte
     return SizedBox(
-      width: 125.0,
-      height: 175.0,
-      child: Material(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(16.0),
-        child: InkWell(
-          onTap: onClick,
-          borderRadius: BorderRadius.circular(16.0),
-          child: Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ImageApi(
-                    imagePath: imagePath,
-                    borderRadius: 12.0,
-                    width: 500,
-                  ),
-                ),
+      width: 120.0,
+      // Pas de height fixe ici pour éviter les dépassements si le texte est long,
+      // on laisse la Column gérer la hauteur verticale.
+      child: Column(
+        mainAxisSize: MainAxisSize.min, // Prend le minimum de place nécessaire
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 6.0),
-                  child: Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.0,
-                    ),
-                  ),
+          // 2. L'image (Partie cliquable principale)
+          Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(12.0),
+            clipBehavior: Clip.hardEdge, // Coupe l'image si elle dépasse les bords arrondis
+            child: InkWell(
+              onTap: onClick,
+              child: SizedBox(
+                height: 160.0, // HAUTEUR FIXE pour l'image
+                width: double.infinity, // Prend toute la largeur du parent (120.0)
+                child: ImageApi(
+                  imagePath: imagePath,
+                  width: 500, // Résolution de l'image demandée à l'API
+                  // Assure-toi que ton widget ImageApi gère bien le BoxFit.cover
+                  // Si ImageApi est juste un wrapper, il doit remplir ce SizedBox
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+
+          const SizedBox(height: 8.0), // Espace entre image et texte
+
+          // 3. Le Texte (Partie descriptive)
+          // On le sort du InkWell pour que le clic sur le texte soit optionnel,
+          // ou on peut englober tout le widget dans un GestureDetector si tu préfères.
+          GestureDetector(
+            onTap: onClick,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 13.0, // Un peu plus petit pour bien tenir
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
