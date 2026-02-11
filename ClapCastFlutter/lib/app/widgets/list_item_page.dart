@@ -30,8 +30,11 @@ class MediaListLayout extends StatefulWidget {
 }
 
 class _MediaListLayoutState extends State<MediaListLayout> {
+  // états
   String _searchText = "";
   bool _showFilters = false;
+
+  // Filtres
   bool _isActorFilter = true;
   bool _isMovieFilter = true;
   int _genderFilter = 0; // 0: Tous, 1: Femme, 2: Homme
@@ -194,17 +197,19 @@ class _MediaListLayoutState extends State<MediaListLayout> {
         .toLowerCase() : "";
 
     return widget.people.where((person) {
+      // 1. Texte
       final nameCleaned = (person.name?.replaceAll(" ", "") ?? "")
           .toLowerCase();
       final matchesText = queryCleaned.isEmpty ||
           nameCleaned.contains(queryCleaned);
 
-      // 2. Genre
+      // 2. Genre (0: All, 1: F, 2: M)
       bool matchesGender = true;
       if (_genderFilter != 0) {
         matchesGender = person.gender == _genderFilter;
       }
 
+      // 3. Français Only
       bool matchesFrench = true;
       if (_onlyFrenchFilter) {
         if (person.knownForMovies.isNotEmpty) {
@@ -219,6 +224,7 @@ class _MediaListLayoutState extends State<MediaListLayout> {
         }
       }
 
+      // 4. Image requise
       final hasImage = person.profilePathImage != null &&
           person.profilePathImage!.isNotEmpty;
 
@@ -232,11 +238,13 @@ class _MediaListLayoutState extends State<MediaListLayout> {
         .toLowerCase() : "";
 
     return widget.movies.where((movie) {
+      // 1. Texte
       final titleCleaned = (movie.title?.replaceAll(" ", "") ?? "")
           .toLowerCase();
       final matchesText = queryCleaned.isEmpty ||
           titleCleaned.contains(queryCleaned);
 
+      // 2. Récent (2020+)
       bool matchesRecent = true;
       if (_isRecentFilter) {
         int year = 0;
@@ -246,11 +254,13 @@ class _MediaListLayoutState extends State<MediaListLayout> {
         matchesRecent = year >= 2020 && year <= 2029;
       }
 
+      // 3. Français Only
       bool matchesFrench = true;
       if (_onlyFrenchFilter) {
         matchesFrench = (movie.language ?? "").toLowerCase().startsWith("fr");
       }
 
+      // 4. Image requise
       final hasImage = movie.posterPathImage != null &&
           movie.posterPathImage!.isNotEmpty;
 
