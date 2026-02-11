@@ -4,7 +4,7 @@ import '../../app/widgets/header.dart';
 import '../../ressources/app_color.dart';
 import '../model/movie.dart';
 import '../model/person.dart';
-
+import 'filterBox.dart';
 import 'button.dart';
 
 class MediaListLayout extends StatefulWidget {
@@ -34,122 +34,118 @@ class _MediaListLayoutState extends State<MediaListLayout> {
   bool _showFilters = false;
   bool _isActorFilter = true;
   bool _isMovieFilter = true;
+  int _genderFilter = 0; // 0: Tous, 1: Femme, 2: Homme
+  bool _isRecentFilter = false;
+  bool _onlyFrenchFilter = false;
 
   @override
   Widget build(BuildContext context) {
     final bool isApiSearch = widget.onSearchQueryChanged != null;
 
-    final filteredPeople = isApiSearch ? widget.people : _filterPeopleLocally();
-    final filteredMovies = isApiSearch ? widget.movies : _filterMoviesLocally();
+    final filteredPeople = _filterPeopleLocally(applyTextFilter: !isApiSearch);
+    final filteredMovies = _filterMoviesLocally(applyTextFilter: !isApiSearch);
 
-    return AppMenuBackground(
-      child: SafeArea(
-        child: Column(
-          children: [
-            SectionBar(
-              sectionName: widget.title,
-              onBackClick: widget.onBackClick,
-            ),
+    return Scaffold(
+      backgroundColor: AppColor.appBackground,
+      body: Stack(
+        children: [
+          AppMenuBackground(
+            child: SafeArea(
+              child: Column(
+                children: [
+                  SectionBar(
+                    sectionName: widget.title,
+                    onBackClick: widget.onBackClick,
+                  ),
 
-            Material(
-              type: MaterialType.transparency,
-              child: SearchBarWidget(
-                query: _searchText,
-                onQueryChange: (val) {
-                  setState(() => _searchText = val);
-                  widget.onSearchQueryChanged?.call(val);
-                },
-                onSearchClick: () {
-                  FocusScope.of(context).unfocus();
-                },
-                isFilterOpen: _showFilters,
-                onFilterToggle: (isOpen) {
-                  setState(() {
-                    _showFilters = isOpen;
-                  });
-                },
-              ),
-            ),
-
-            if (_showFilters)
-              _buildFilterToggles(),
-
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  if (_isActorFilter && filteredPeople.isNotEmpty) ...[
-                    _buildSectionHeader("Acteurs"),
-                    _buildGrid(
-                      itemCount: filteredPeople.length,
-                      itemBuilder: (context, index) {
-                        final person = filteredPeople[index];
-
-                        return MediaCardButton(
-                          text: person.name ?? "Inconnu",
-                          imagePath: person.profilePathImage ?? "",
-                          onClick: () => widget.onContentClick(person.id, true),
-                        );
+                  Material(
+                    type: MaterialType.transparency,
+                    child: SearchBarWidget(
+                      query: _searchText,
+                      onQueryChange: (val) {
+                        setState(() => _searchText = val);
+                        widget.onSearchQueryChanged?.call(val);
+                      },
+                      onSearchClick: () {
+                        FocusScope.of(context).unfocus();
+                      },
+                      isFilterOpen: _showFilters,
+                      onFilterToggle: (isOpen) {
+                        setState(() {
+                          _showFilters = isOpen;
+                        });
                       },
                     ),
-                  ],
+                  ),
 
-                  if (_isMovieFilter && filteredMovies.isNotEmpty) ...[
-                    _buildSectionHeader("Films"),
-                    _buildGrid(
-                      itemCount: filteredMovies.length,
-                      itemBuilder: (context, index) {
-                        final movie = filteredMovies[index];
+                  Expanded(
+                    child: CustomScrollView(
+                      slivers: [
+                        if (_isActorFilter && filteredPeople.isNotEmpty) ...[
+                          _buildSectionHeader("Acteurs"),
+                          _buildGrid(
+                            itemCount: filteredPeople.length,
+                            itemBuilder: (context, index) {
+                              final person = filteredPeople[index];
+                              return MediaCardButton(
+                                text: person.name ?? "Inconnu",
+                                imagePath: person.profilePathImage ?? "",
+                                onClick: () =>
+                                    widget.onContentClick(person.id, true),
+                              );
+                            },
+                          ),
+                        ],
 
-                        return MediaCardButton(
-                          text: movie.title ?? "Inconnu",
-                          imagePath: movie.posterPathImage ?? "",
-                          onClick: () => widget.onContentClick(movie.id, false),
-                        );
-                      },
+                        if (_isMovieFilter && filteredMovies.isNotEmpty) ...[
+                          _buildSectionHeader("Films"),
+                          _buildGrid(
+                            itemCount: filteredMovies.length,
+                            itemBuilder: (context, index) {
+                              final movie = filteredMovies[index];
+                              return MediaCardButton(
+                                text: movie.title ?? "Inconnu",
+                                imagePath: movie.posterPathImage ?? "",
+                                onClick: () =>
+                                    widget.onContentClick(movie.id, false),
+                              );
+                            },
+                          ),
+                        ],
+
+                        const SliverToBoxAdapter(child: SizedBox(height: 20)),
+                      ],
                     ),
-                  ],
-
-                  const SliverToBoxAdapter(child: SizedBox(height: 20)),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
+          ),
 
-  Widget _buildFilterToggles() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Material(
-        type: MaterialType.transparency,
-        child: Wrap(
-          spacing: 8.0,
-          runSpacing: 4.0,
-          children: [
-            FilterChip(
-              label: const Text("Acteurs"),
-              selected: _isActorFilter,
-              onSelected: (val) => setState(() => _isActorFilter = val),
-              selectedColor: AppColor.btnPrimary,
-              checkmarkColor: Colors.white,
-              labelStyle: TextStyle(
-                color: _isActorFilter ? Colors.white : Colors.black,
+          if (_showFilters)
+            Positioned(
+              top: 135,
+              right: 16,
+              child: Center(
+                child: FilterWidget(
+                  isActorFilter: _isActorFilter,
+                  onActorFilterChange: (v) =>
+                      setState(() => _isActorFilter = v),
+                  isMovieFilter: _isMovieFilter,
+                  onMovieFilterChange: (v) =>
+                      setState(() => _isMovieFilter = v),
+                  genderFilter: _genderFilter,
+                  onGenderChange: (v) => setState(() => _genderFilter = v),
+                  isRecentFilter: _isRecentFilter,
+                  onRecentChange: (v) => setState(() => _isRecentFilter = v),
+                  onlyFrenchFilter: _onlyFrenchFilter,
+                  onOnlyFrenchFilter: (v) =>
+                      setState(() => _onlyFrenchFilter = v),
+                  onDismiss: () => setState(() => _showFilters = false),
+                ),
               ),
             ),
-            FilterChip(
-              label: const Text("Films"),
-              selected: _isMovieFilter,
-              onSelected: (val) => setState(() => _isMovieFilter = val),
-              selectedColor: AppColor.btnPrimary,
-              checkmarkColor: Colors.white,
-              labelStyle: TextStyle(
-                color: _isMovieFilter ? Colors.white : Colors.black,
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -176,7 +172,8 @@ class _MediaListLayoutState extends State<MediaListLayout> {
     );
   }
 
-  SliverGrid _buildGrid({required int itemCount, required IndexedWidgetBuilder itemBuilder}) {
+  SliverGrid _buildGrid(
+      {required int itemCount, required IndexedWidgetBuilder itemBuilder}) {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
         itemBuilder,
@@ -191,19 +188,73 @@ class _MediaListLayoutState extends State<MediaListLayout> {
     );
   }
 
-  List<PersonOverview> _filterPeopleLocally() {
-    final queryCleaned = _searchText.replaceAll(" ", "").toLowerCase();
+  List<PersonOverview> _filterPeopleLocally({required bool applyTextFilter}) {
+    final queryCleaned = applyTextFilter ? _searchText
+        .replaceAll(" ", "")
+        .toLowerCase() : "";
+
     return widget.people.where((person) {
-      final nameCleaned = (person.name?.replaceAll(" ", "") ?? "").toLowerCase();
-      return queryCleaned.isEmpty || nameCleaned.contains(queryCleaned);
+      final nameCleaned = (person.name?.replaceAll(" ", "") ?? "")
+          .toLowerCase();
+      final matchesText = queryCleaned.isEmpty ||
+          nameCleaned.contains(queryCleaned);
+
+      // 2. Genre
+      bool matchesGender = true;
+      if (_genderFilter != 0) {
+        matchesGender = person.gender == _genderFilter;
+      }
+
+      bool matchesFrench = true;
+      if (_onlyFrenchFilter) {
+        if (person.knownForMovies.isNotEmpty) {
+          try {
+            matchesFrench = person.knownForMovies.any((m) =>
+                (m.language ?? "").toLowerCase().startsWith("fr"));
+          } catch (e) {
+            matchesFrench = false;
+          }
+        } else {
+          matchesFrench = false;
+        }
+      }
+
+      final hasImage = person.profilePathImage != null &&
+          person.profilePathImage!.isNotEmpty;
+
+      return matchesText && matchesGender && matchesFrench && hasImage;
     }).toList();
   }
 
-  List<MovieOverview> _filterMoviesLocally() {
-    final queryCleaned = _searchText.replaceAll(" ", "").toLowerCase();
+  List<MovieOverview> _filterMoviesLocally({required bool applyTextFilter}) {
+    final queryCleaned = applyTextFilter ? _searchText
+        .replaceAll(" ", "")
+        .toLowerCase() : "";
+
     return widget.movies.where((movie) {
-      final titleCleaned = (movie.title?.replaceAll(" ", "") ?? "").toLowerCase();
-      return queryCleaned.isEmpty || titleCleaned.contains(queryCleaned);
+      final titleCleaned = (movie.title?.replaceAll(" ", "") ?? "")
+          .toLowerCase();
+      final matchesText = queryCleaned.isEmpty ||
+          titleCleaned.contains(queryCleaned);
+
+      bool matchesRecent = true;
+      if (_isRecentFilter) {
+        int year = 0;
+        if (movie.releaseDate != null && movie.releaseDate!.length >= 4) {
+          year = int.tryParse(movie.releaseDate!.substring(0, 4)) ?? 0;
+        }
+        matchesRecent = year >= 2020 && year <= 2029;
+      }
+
+      bool matchesFrench = true;
+      if (_onlyFrenchFilter) {
+        matchesFrench = (movie.language ?? "").toLowerCase().startsWith("fr");
+      }
+
+      final hasImage = movie.posterPathImage != null &&
+          movie.posterPathImage!.isNotEmpty;
+
+      return matchesText && matchesRecent && matchesFrench && hasImage;
     }).toList();
   }
 }
