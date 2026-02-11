@@ -1,3 +1,4 @@
+import 'package:clapcastflutter/ressources/app_color.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import '../../app/model/movie.dart';
@@ -130,8 +131,8 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                   rowTitle,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 18.0,
+                    color: AppColor.white,
+                    fontSize: 14.0,
                   ),
                 ),
               ),
@@ -141,9 +142,9 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                   angle: math.pi,
                   child: Image.asset(
                     "assets/ic_arrow_back.png",
-                    width: 24,
-                    height: 24,
-                    color: Colors.black,
+                    width: 14,
+                    height: 14,
+                    color: AppColor.white,
                   ),
                 ),
               ),
@@ -151,7 +152,7 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 190.0,
+          height: 175.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
