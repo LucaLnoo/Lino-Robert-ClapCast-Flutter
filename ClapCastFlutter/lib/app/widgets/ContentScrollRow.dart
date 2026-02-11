@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import '../../ressources/app_color.dart';
-import 'imageApi.dart';
+import '../../app/model/movie.dart';
+import '../../app/model/person.dart';
+
 import 'button.dart';
 
+// ==============================================================================
+// 1. WIDGET POUR LES PERSONNES
+// ==============================================================================
 class ContentScrollRowPeople extends StatelessWidget {
   final String rowTitle;
-  final List<dynamic>? people;
-  final Function(dynamic) onPersonClick;
-  final Function(List<dynamic>) onMoreClick;
+  final List<PersonOverview>? people;
+  final Function(PersonOverview) onPersonClick;
+  final Function(List<PersonOverview>) onMoreClick;
 
   const ContentScrollRowPeople({
     super.key,
@@ -20,30 +24,25 @@ class ContentScrollRowPeople extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _GenericContentScrollRow<dynamic>(
+    return _GenericContentScrollRow<PersonOverview>(
       rowTitle: rowTitle,
       dataList: people,
       onItemClick: onPersonClick,
       onMoreClick: onMoreClick,
-      nameMapper: (item) {
-        // TODO: API - Décommenter quand le modèle PersonOverview aura 'name'
-        // return item.name ?? "Inconnu";
-        return "Nom Acteur (TODO)";
-      },
-      imageMapper: (item) {
-        // TODO: API - Décommenter quand le modèle aura 'profilePath'
-        // return item.profilePath ?? "";
-        return "";
-      },
+      nameMapper: (item) => item.name ?? "Inconnu",
+      imageMapper: (item) => item.profilePathImage  ?? "",
     );
   }
 }
 
+// ==============================================================================
+// 2. WIDGET POUR LES FILMS
+// ==============================================================================
 class ContentScrollRowMovie extends StatelessWidget {
   final String rowTitle;
-  final List<dynamic>? movies;
-  final Function(dynamic) onMovieClick;
-  final Function(List<dynamic>) onMoreClick;
+  final List<MovieOverview>? movies;
+  final Function(MovieOverview) onMovieClick;
+  final Function(List<MovieOverview>) onMoreClick;
 
   const ContentScrollRowMovie({
     super.key,
@@ -55,29 +54,26 @@ class ContentScrollRowMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _GenericContentScrollRow<dynamic>(
+    return _GenericContentScrollRow<MovieOverview>(
       rowTitle: rowTitle,
       dataList: movies,
       onItemClick: onMovieClick,
       onMoreClick: onMoreClick,
-      nameMapper: (item) {
-        return item.title ?? "Inconnu";
-      },
-      imageMapper: (item) {
-        // TODO: API - Décommenter quand le modèle MovieOverview aura 'posterPath'
-        // return item.posterPath ?? "";
-
-        return ""; // TEMP: évite le crash lors des tests
-      },
+      // Dart sait que 'item' est un MovieOverview
+      nameMapper: (item) => item.title ?? "Inconnu",
+      imageMapper: (item) => item.posterPathImage ?? "",
     );
   }
 }
 
+// ==============================================================================
+// 3. WIDGET POUR LE CASTING (DetailedScreen)
+// ==============================================================================
 class ContentScrollRowCast extends StatelessWidget {
   final String rowTitle;
-  final List<dynamic>? castMembers;
-  final Function(dynamic) onPersonClick;
-  final Function(List<dynamic>) onMoreClick;
+  final List<PersonOverview>? castMembers;
+  final Function(PersonOverview) onPersonClick;
+  final Function(List<PersonOverview>) onMoreClick;
 
   const ContentScrollRowCast({
     super.key,
@@ -89,28 +85,26 @@ class ContentScrollRowCast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _GenericContentScrollRow<dynamic>(
+    return _GenericContentScrollRow<PersonOverview>(
       rowTitle: rowTitle,
       dataList: castMembers,
       onItemClick: onPersonClick,
       onMoreClick: onMoreClick,
-      nameMapper: (item) {
-        // TODO: API - Connecter au champ 'actorName'
-        return "Nom Acteur (TODO)";
-      },
-      imageMapper: (item) {
-        // TODO: API - Connecter au champ 'profilePath'
-        return "";
-      },
+      nameMapper: (item) => item.name ?? "Inconnu",
+      imageMapper: (item) => item.profilePathImage ?? "",
     );
   }
 }
 
+// ==============================================================================
+// 4. MOTEUR GÉNÉRIQUE POUR LES CONTENT SCROLL ROW
+// ==============================================================================
 class _GenericContentScrollRow<T> extends StatelessWidget {
   final String rowTitle;
   final List<T>? dataList;
   final Function(T) onItemClick;
   final Function(List<T>) onMoreClick;
+
   final String Function(T) nameMapper;
   final String Function(T) imageMapper;
 
@@ -142,7 +136,7 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                   rowTitle,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 18.0,
                   ),
                 ),
@@ -155,7 +149,7 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                     "assets/ic_arrow_back.png",
                     width: 24,
                     height: 24,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -163,8 +157,9 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
           ),
         ),
 
+        // --- LISTE HORIZONTALE ---
         SizedBox(
-          height: 190.0,
+          height: 240,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -177,6 +172,7 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: MediaCardButton(
+                    // On utilise les mappers pour récupérer les infos sans connaître le type exact
                     text: nameMapper(item),
                     imagePath: imageMapper(item),
                     onClick: () => onItemClick(item),
@@ -191,6 +187,9 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
   }
 }
 
+// ==============================================================================
+// 5. ANIMATION DES ITEMS
+// ==============================================================================
 class _AnimatedItem extends StatefulWidget {
   final int index;
   final Widget child;
@@ -208,7 +207,10 @@ class _AnimatedItemState extends State<_AnimatedItem> with SingleTickerProviderS
   @override
   void initState() {
     super.initState();
-    final int delayMs = (widget.index % 4) * 50;
+    // Délai en cascade pour l'animation d'apparition
+    // On limite à index 10 pour ne pas attendre 10 secondes si la liste est longue
+    final int safeIndex = (widget.index < 10) ? widget.index : 10;
+    final int delayMs = safeIndex * 50;
 
     Future.delayed(Duration(milliseconds: delayMs), () {
       if (mounted) {
