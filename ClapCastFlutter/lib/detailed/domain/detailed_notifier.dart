@@ -10,12 +10,26 @@ class DetailedNotifier extends ChangeNotifier {
   PersonDetails? person;
 
   void fetchMovieDetails(int movieId) async {
-    movie = await movieRepository.getMovieDetails(movieId);
+    movie = null;
     notifyListeners();
+    try{
+      movie = await movieRepository.getMovieDetails(movieId);
+    }catch(e){
+      debugPrint("FETCH MOVIE ERROR: $e");
+    }finally{
+      notifyListeners();
+    }
   }
 
   void fetchPersonDetails(int personId) async{
-    person = await personRepository.getMovieDetails(personId);
+    person = null;
     notifyListeners();
+    try{
+      person = await personRepository.getPersonDetails(personId);
+    }catch(e){
+      debugPrint("FETCH PERSON ERROR: $e");
+    }finally{
+      notifyListeners();
+    }
   }
 }
