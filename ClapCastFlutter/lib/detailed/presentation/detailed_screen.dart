@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../app/widgets/background.dart';
 import '../../app/widgets/base_layout.dart';
+import '../../app/widgets/qr_code.dart';
 import '../../search/presentation/category_screen.dart';
 import '../domain/detailed_notifier.dart';
 
@@ -64,16 +65,9 @@ class _DetailedScreenState extends State<DetailedScreen> {
     }
 
     return SafeArea(
-      child: Column(
-        children: [
-          if (widget.isAPerson) ...[
-            _buildActorContent(notifier.person!)
-          ] else
-            ...[
-              _buildMovieContent(notifier.movie!)
-            ]
-        ],
-      ),
+      child: widget.isAPerson
+          ? _buildActorContent(notifier.person!)
+          : _buildMovieContent(notifier.movie!),
     );
   }
 
@@ -89,33 +83,50 @@ class _DetailedScreenState extends State<DetailedScreen> {
       );
     }).toList();
 
-    return Column(
-      children: [
-        SectionBar(
-            sectionName: person.name ?? "Unknown",
-            onBackClick: () => Navigator.pop(context)
-        ),
-        _buildImage(person.profilePathImage),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            person.biography ?? "No biography",
-            style: const TextStyle(
-              color: AppColor.white,
-              fontSize: 14.0,
-              height: 1.5,
-            ),
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        children: [
+          SectionBar(
+              sectionName: person.name ?? "Unknown",
+              onBackClick: () => Navigator.pop(context)
           ),
-        ),
-        ContentScrollRowMovie(rowTitle: "Known for:",
-          movies: moviesList,
-          onMovieClick: (movie) => _navigateToDetail(movie.id, false),
-          onMoreClick: (movies) => _navigateToCategory("Distribution", people: [], movies: movies),
-        )
-      ],
+          _buildImage(person.profilePathImage),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              person.biography ?? "No biography",
+              style: const TextStyle(
+                color: AppColor.white,
+                fontSize: 14.0,
+                height: 1.5,
+              ),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          ContentScrollRowMovie(
+            rowTitle: "Known for:",
+            movies: moviesList,
+            onMovieClick: (movie) => _navigateToDetail(movie.id, false),
+            onMoreClick: (movies) => _navigateToCategory("Distribution", people: [], movies: movies),
+          ),
+          const SizedBox(height: 16),
+          QrCodeClapCast(url: "https://www.themoviedb.org/person/${person.id}"),
+          const SizedBox(height: 8),
+          Text(
+              "Click or Scan",
+              style: const TextStyle(
+                color: AppColor.white,
+                fontSize: 14.0,
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 
@@ -129,33 +140,50 @@ class _DetailedScreenState extends State<DetailedScreen> {
       );
     }).toList();
 
-    return Column(
-      children: [
-        SectionBar(
-            sectionName: movie.title ?? "Unknown",
-            onBackClick: () => Navigator.pop(context)
-        ),
-        _buildImage(movie.posterPathImage),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            movie.overview ?? "No description",
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          SectionBar(
+              sectionName: movie.title ?? "Unknown",
+              onBackClick: () => Navigator.pop(context)
+          ),
+          _buildImage(movie.posterPathImage),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              movie.overview ?? "No description",
+              style: const TextStyle(
+                color: AppColor.white,
+                fontSize: 14.0,
+                height: 1.5,
+              ),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          ContentScrollRowCast(
+            rowTitle: "Distribution",
+            castMembers: castList,
+            onPersonClick: (person) => _navigateToDetail(person.id, true),
+            onMoreClick: (people) => _navigateToCategory("Distribution", people: people, movies: []),
+          ),
+          const SizedBox(height: 16),
+          QrCodeClapCast(url: "https://www.themoviedb.org/movie/${movie.id}"),
+          const SizedBox(height: 8),
+          Text(
+            "Click or Scan",
             style: const TextStyle(
               color: AppColor.white,
               fontSize: 14.0,
               height: 1.5,
             ),
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
           ),
-        ),
-        ContentScrollRowCast(rowTitle: "Distribution",
-            castMembers: castList,
-            onPersonClick: (person) => _navigateToDetail(person.id, true),
-            onMoreClick: (people) => _navigateToCategory("Distribution", people: people, movies: []),
-        )
-      ],
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 
