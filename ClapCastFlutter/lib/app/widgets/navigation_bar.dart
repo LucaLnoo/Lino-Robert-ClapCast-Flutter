@@ -17,7 +17,7 @@ class NavigationBarFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavigationBar(
         selectedIndex: selectedIndex,
-        onDestinationSelected: onDestinationSelected,
+        onDestinationSelected: newDestinationSelected,
 
         labelTextStyle: WidgetStateProperty.all(
           const TextStyle(color: AppColor.appContrast, fontSize: AppText.medium_12),
