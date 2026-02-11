@@ -91,11 +91,9 @@ class SectionBar extends StatelessWidget {
 }
 
 class SearchBarWidget extends StatefulWidget {
-  final String query;
-  final ValueChanged<String> onQueryChange;
-  final VoidCallback onSearchClick;
-
-  // TODO Ajouter les callbacks pour les filtres (isActorFilter, etc.)
+  final String query; // La valeur initiale
+  final ValueChanged<String> onQueryChange; // Callback quand ça change
+  final VoidCallback onSearchClick; // Callback quand on clique sur la loupe
 
   const SearchBarWidget({
     super.key,
@@ -109,15 +107,35 @@ class SearchBarWidget extends StatefulWidget {
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
+  late TextEditingController _controller;
   bool showFilter = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.query);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(SearchBarWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.query != _controller.text) {
+      _controller.text = widget.query;
+      _controller.selection = TextSelection.fromPosition(TextPosition(offset: widget.query.length));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppMargin.medium,
-          vertical: AppMargin.small
-      ),
+          horizontal: AppMargin.medium, vertical: AppMargin.small),
       child: Column(
         children: [
           Row(
@@ -134,16 +152,16 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     children: [
                       Expanded(
                         child: TextField(
-                          controller: TextEditingController(text: widget.query)
-                            ..selection = TextSelection.fromPosition(
-                                TextPosition(offset: widget.query.length)),
+                          controller: _controller,
                           onChanged: widget.onQueryChange,
+                          onSubmitted: (_) => widget.onSearchClick(),
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
-                            hintText: "Rechercher...", // TODO Utiliser localization stringResource
+                            hintText: "Rechercher...",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.0),
                           ),
                           cursorColor: Colors.white,
                         ),
@@ -161,47 +179,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   ),
                 ),
               ),
-
-              const SizedBox(width: 8.0),
-
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    showFilter = !showFilter;
-                  });
-                },
-                child: Container(
-                  width: 45.0,
-                  height: 45.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppRadius.medium),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Assets.assetsIcFilter,
-                        color: AppColor.appContrast,
-                        width: 24,
-                        height: 24,
-                      ),
-                      Text(
-                        "Filtres", // TODO Utiliser localization
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: AppColor.appContrast,
-                          fontSize: 10,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              if (showFilter)
+              // TODO Integrer FilterWidget ici et passer les parametres
+                Container(height: 50, color: Colors.transparent)
             ],
           ),
-
-          if (showFilter)
-          // TODO Integrer FilterWidget ici et passer les parametres
-            Container(height: 50, color: Colors.transparent)
         ],
       ),
     );
