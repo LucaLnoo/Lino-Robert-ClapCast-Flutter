@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../app/widgets/background.dart';
 import '../../app/widgets/header.dart';
+import '../../app/widgets/list_item_page.dart';
 import '../domain/search_notifier.dart';
 
 class SearchScreen extends StatelessWidget{
@@ -14,37 +15,30 @@ class SearchScreen extends StatelessWidget{
     // read evite de redessiner l'interface
     final searchActions = context.read<SearchNotifier>();
     final searchNotifier = context.watch<SearchNotifier>();
-    final movies = searchNotifier.movies;
-    final people = searchNotifier.people;
+    final movies = searchNotifier.movies ?? [];
+    final people = searchNotifier.people ?? [];
 
     return BaseLayout(
       currentIndex: 1,
-      child: AppMenuBackground(
-        child: SafeArea(
-          child: Column(
-            children: [
-              HeaderLogo(),
-              SearchBarWidget(
-                query: searchNotifier.currentQuery,
+      child: MediaListLayout(
+        title: "Search",
+        people: people,
+        movies: movies,
 
-                onQueryChange: (String value) {
-                  searchActions.updateQuery(value);
-                },
+        onContentClick: (id, isPerson) {
+          if (isPerson) {
+            //Navigator.pushNamed(context, '/detailed_screen', arguments: id);
+          } else {
+            //Navigator.pushNamed(context, '/detailed_screen', arguments: id);
+          }
+        },
 
-                onSearchClick: () {
-                  searchActions.fetchMoviesByQuery(searchNotifier.currentQuery);
-                  searchActions.fetchPeopleByQuery(searchNotifier.currentQuery);
+        onBackClick: () => Navigator.pop(context),
 
-                  FocusScope.of(context).unfocus();
-                },
-              ),
-              if (movies != null && movies.isNotEmpty)
-                Text(movies.first.title ?? "null"),
-              if (people != null && people.isNotEmpty)
-                Text(people.first.name ?? "null"),
-            ]
-          )
-        )
+        onSearchQueryChanged: (query) {
+          searchActions.fetchPeopleByQuery(query);
+          searchActions.fetchMoviesByQuery(query);
+        },
       )
     );
   }
