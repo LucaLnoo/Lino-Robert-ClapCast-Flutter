@@ -1,6 +1,7 @@
 import 'package:clapcastflutter/starting/domain/starting_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../app/widgets/ContentScrollRow.dart';
 import '../../app/widgets/base_layout.dart';
 import '../../app/widgets/background.dart';
 
@@ -20,10 +21,16 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(0),
                 color: Colors.white.withOpacity(0.8),
                 child: Column(
                   children: [
+                    ContentScrollRowPeople(
+                      rowTitle: "test",
+                      people: people,
+                      onPersonClick: (people) {},
+                      onMoreClick: (people) {},
+                    ),
                     Text(
                       "First Movie : ${movies?.isNotEmpty == true ? movies!.first.title : 'No movie data'}",
                       style: const TextStyle(color: Colors.black),
