@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../app/widgets/background.dart';
+import '../../generated/assets.dart';
+import '../../ressources/app_dimens.dart';
 import '../domain/starting_notifier.dart';
 
 class SplashScreen extends StatefulWidget{
@@ -45,6 +47,43 @@ class _SplashScreenState extends State<SplashScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+        ),
+
+        body: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: AppDimension.xlarge),
+
+                  Padding(
+                    padding: const EdgeInsets.all(AppDimension.xlarge),
+                    child: Image.asset(
+                      Assets.assetsIcLoginLogo,
+                      width: 300,
+                      height: 300,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+
+                  const Spacer(),
+
+                  Image.asset(
+                    Assets.assetsLoaderClapCast,
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.cover,
+                  ),
+
+                  const Spacer(),
+                ],
+              ),
+            ),
+          ],
         ),
       )
     );
