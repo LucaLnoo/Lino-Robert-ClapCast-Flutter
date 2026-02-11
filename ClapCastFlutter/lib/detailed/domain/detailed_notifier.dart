@@ -13,7 +13,15 @@ class DetailedNotifier extends ChangeNotifier {
     movie = null;
     notifyListeners();
     try{
-      movie = await movieRepository.getMovieDetails(movieId);
+      var fetchedMovie = await movieRepository.getMovieDetails(movieId);
+
+      if (fetchedMovie.distribution != null) {
+        fetchedMovie.distribution!.cast.removeWhere((actor) =>
+        actor.profilePathImage == null || actor.profilePathImage!.isEmpty
+        );
+      }
+
+      movie = fetchedMovie;
     }catch(e){
       debugPrint("FETCH MOVIE ERROR: $e");
     }finally{
@@ -25,7 +33,15 @@ class DetailedNotifier extends ChangeNotifier {
     person = null;
     notifyListeners();
     try{
-      person = await personRepository.getPersonDetails(personId);
+      var fetchedPerson = await personRepository.getPersonDetails(personId);
+
+      if (fetchedPerson.knownForMovies != null) {
+        fetchedPerson.knownForMovies!.cast.removeWhere((film) =>
+        film.posterPathImage == null || film.posterPathImage!.isEmpty
+        );
+      }
+
+      person = fetchedPerson;
     }catch(e){
       debugPrint("FETCH PERSON ERROR: $e");
     }finally{
