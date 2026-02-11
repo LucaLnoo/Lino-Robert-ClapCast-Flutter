@@ -43,6 +43,19 @@ class AppText {
   static const xxxxlarge = 56.0;
 }
 
+class AppDimension {
+  static const veryTiny = 2.0;
+  static const tiny = 4.0;
+  static const small = 8.0;
+  static const medium_12 = 12.0;
+  static const medium = 16.0;
+  static const large = 24.0;
+  static const xlarge = 32.0;
+  static const xxlarge = 40.0;
+  static const xxxlarge = 48.0;
+  static const xxxxlarge = 56.0;
+}
+
 class AppRadius {
   static const veryTiny = 2.0;
   static const tiny = 5.0;
