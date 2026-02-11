@@ -5,6 +5,7 @@ class ImageApi extends StatelessWidget {
   final double borderRadius;
   final int width;
   final String? description;
+  final double? height;
 
   const ImageApi({
     super.key,
@@ -12,6 +13,7 @@ class ImageApi extends StatelessWidget {
     this.borderRadius = 16.0,
     this.width = 500,
     this.description,
+    this.height,
   });
 
   @override
@@ -25,6 +27,7 @@ class ImageApi extends StatelessWidget {
         imageUrl,
 
         width: double.infinity,
+        height: height,
 
         fit: BoxFit.cover,
 
