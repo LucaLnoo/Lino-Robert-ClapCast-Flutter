@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import '../../app/model/movie.dart';
 import '../../app/model/person.dart';
-
 import 'button.dart';
 
 // ==============================================================================
@@ -30,7 +29,7 @@ class ContentScrollRowPeople extends StatelessWidget {
       onItemClick: onPersonClick,
       onMoreClick: onMoreClick,
       nameMapper: (item) => item.name ?? "Inconnu",
-      imageMapper: (item) => item.profilePathImage  ?? "",
+      imageMapper: (item) => item.profilePathImage ?? "",
     );
   }
 }
@@ -59,7 +58,6 @@ class ContentScrollRowMovie extends StatelessWidget {
       dataList: movies,
       onItemClick: onMovieClick,
       onMoreClick: onMoreClick,
-      // Dart sait que 'item' est un MovieOverview
       nameMapper: (item) => item.title ?? "Inconnu",
       imageMapper: (item) => item.posterPathImage ?? "",
     );
@@ -104,7 +102,6 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
   final List<T>? dataList;
   final Function(T) onItemClick;
   final Function(List<T>) onMoreClick;
-
   final String Function(T) nameMapper;
   final String Function(T) imageMapper;
 
@@ -124,12 +121,9 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 12.0),
-
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 4.0),
+          padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 12.0),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                 child: Text(
@@ -156,23 +150,20 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
             ],
           ),
         ),
-
-        // --- LISTE HORIZONTALE ---
         SizedBox(
-          height: 240,
+          height: 190.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             itemCount: dataList!.length,
             itemBuilder: (context, index) {
               final item = dataList![index];
-
-              return _AnimatedItem(
-                index: index,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              return Container(
+                width: 125.0,
+                margin: const EdgeInsets.only(right: 8.0),
+                child: _AnimatedItem(
+                  index: index,
                   child: MediaCardButton(
-                    // On utilise les mappers pour récupérer les infos sans connaître le type exact
                     text: nameMapper(item),
                     imagePath: imageMapper(item),
                     onClick: () => onItemClick(item),
@@ -190,6 +181,7 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
 // ==============================================================================
 // 5. ANIMATION DES ITEMS
 // ==============================================================================
+
 class _AnimatedItem extends StatefulWidget {
   final int index;
   final Widget child;
@@ -224,17 +216,13 @@ class _AnimatedItemState extends State<_AnimatedItem> with SingleTickerProviderS
 
   @override
   Widget build(BuildContext context) {
-    const duration = Duration(milliseconds: 300);
-    const curve = Curves.easeOut;
-
     return AnimatedScale(
       scale: _scale,
-      duration: duration,
-      curve: curve,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
       child: AnimatedOpacity(
         opacity: _opacity,
-        duration: duration,
-        curve: curve,
+        duration: const Duration(milliseconds: 300),
         child: widget.child,
       ),
     );
