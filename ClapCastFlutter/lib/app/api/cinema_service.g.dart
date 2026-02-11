@@ -237,7 +237,7 @@ class _ActorService implements ActorService {
     )
             .compose(
               _dio.options,
-              'person/{person_id}',
+              'person/${movieId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -264,7 +264,7 @@ class _ActorService implements ActorService {
     )
             .compose(
               _dio.options,
-              'person/{person_id}/movie_credits',
+              'person/${movieId}/movie_credits',
               queryParameters: queryParameters,
               data: _data,
             )

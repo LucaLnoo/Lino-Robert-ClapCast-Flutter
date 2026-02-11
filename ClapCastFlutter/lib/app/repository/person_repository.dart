@@ -29,10 +29,10 @@ class _PersonRepository {
     }
   }
 
-  Future<PersonDetails> getMovieDetails(int movieId) async {
+  Future<PersonDetails> getPersonDetails(int personId) async {
     try{
-      var person = await apiCinema.actorService.getPersonDetails(movieId);
-      var credits = await apiCinema.actorService.getPersonMovieCredits(movieId);
+      var person = await apiCinema.actorService.getPersonDetails(personId);
+      var credits = await apiCinema.actorService.getPersonMovieCredits(personId);
       person = _mergeDetailsAndCredits(person,credits);
       return person;
     }catch(error){
