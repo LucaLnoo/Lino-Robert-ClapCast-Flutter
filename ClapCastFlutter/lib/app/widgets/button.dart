@@ -95,7 +95,23 @@ class ToggleButton extends StatelessWidget {
                 child: Switch(
                   value: isActive,
                   onChanged: onCheckedChange,
-                  activeColor: AppColor.btnPrimary,
+                  thumbColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return AppColor.btnPrimary;
+                    }
+                    return Colors.grey;
+                  }),
+
+                  trackColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return AppColor.btnPrimary.withOpacity(0.5);
+                    }
+                    return null;
+                  }),
+
+                  trackOutlineColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                    return Colors.transparent;
+                  }),
                 ),
               ),
             ],
