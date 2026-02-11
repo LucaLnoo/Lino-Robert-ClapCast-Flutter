@@ -1,3 +1,4 @@
+import 'package:clapcastflutter/detailed/domain/detailed_notifier.dart';
 import 'package:clapcastflutter/ressources/app_color.dart';
 import 'package:clapcastflutter/ressources/app_theme.dart';
 import 'package:clapcastflutter/search/domain/search_notifier.dart';
@@ -20,6 +21,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => StartingNotifier()),
         ChangeNotifierProvider(create: (context) => SearchNotifier()),
+        ChangeNotifierProvider(create: (context) => DetailedNotifier()),
+
       ],
       child: MaterialApp(
         initialRoute: "/",
