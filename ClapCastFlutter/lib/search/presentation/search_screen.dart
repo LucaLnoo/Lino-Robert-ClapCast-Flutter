@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../app/widgets/list_item_page.dart';
+import '../../detailed/presentation/detailed_screen.dart';
 import '../domain/search_notifier.dart';
 import '../../dashboard/presentation/dashboard_screen.dart';
 
@@ -24,13 +25,7 @@ class SearchScreen extends StatelessWidget{
         people: people,
         movies: movies,
 
-        onContentClick: (id, isPerson) {
-          if (isPerson) {
-            //Navigator.pushNamed(context, '/detailed_screen', arguments: id);
-          } else {
-            //Navigator.pushNamed(context, '/detailed_screen', arguments: id);
-          }
-        },
+        onContentClick: (id, isPerson) => _navigateToDetail(context, id, isPerson),
 
         onBackClick: () {
           if (Navigator.canPop(context)) {
@@ -48,6 +43,18 @@ class SearchScreen extends StatelessWidget{
           searchActions.fetchMoviesByQuery(query);
         },
       )
+    );
+  }
+
+  void _navigateToDetail(BuildContext context, int id, bool isPerson) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailedScreen(
+          contentId: id,
+          isAPerson: isPerson,
+        ),
+      ),
     );
   }
 }
