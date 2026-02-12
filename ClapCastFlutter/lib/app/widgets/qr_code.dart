@@ -11,20 +11,34 @@ class QrCodeClapCast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return QrImageView(
-      data: url,
-      version: QrVersions.auto,
-      size: 200.0,
+    return Column(
+      children: [
+        QrImageView(
+          data: url,
+          version: QrVersions.auto,
+          size: 200.0,
 
-      eyeStyle: const QrEyeStyle(
-        eyeShape: QrEyeShape.square,
-        color: AppColor.appContrast,
-      ),
+          eyeStyle: const QrEyeStyle(
+            eyeShape: QrEyeShape.square,
+            color: AppColor.appContrast,
+          ),
 
-      dataModuleStyle: const QrDataModuleStyle(
-        dataModuleShape: QrDataModuleShape.circle,
-        color: AppColor.appContrast,
+          dataModuleStyle: const QrDataModuleStyle(
+            dataModuleShape: QrDataModuleShape.circle,
+            color: AppColor.appContrast,
+          ),
         ),
+        const SizedBox(height: 8),
+        Text(
+          "Click or Scan",
+          style: const TextStyle(
+            color: AppColor.white,
+            fontSize: 14.0,
+            height: 1.5,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

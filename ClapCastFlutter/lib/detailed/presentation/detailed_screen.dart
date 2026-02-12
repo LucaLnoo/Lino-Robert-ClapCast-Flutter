@@ -114,16 +114,6 @@ class _DetailedScreenState extends State<DetailedScreen> {
           ),
           const SizedBox(height: 16),
           QrCodeClapCast(url: "https://www.themoviedb.org/person/${person.id}"),
-          const SizedBox(height: 8),
-          Text(
-              "Click or Scan",
-              style: const TextStyle(
-                color: AppColor.white,
-                fontSize: 14.0,
-                height: 1.5,
-              ),
-              textAlign: TextAlign.center,
-          ),
           const SizedBox(height: 16),
         ],
       ),
@@ -171,16 +161,6 @@ class _DetailedScreenState extends State<DetailedScreen> {
           ),
           const SizedBox(height: 16),
           QrCodeClapCast(url: "https://www.themoviedb.org/movie/${movie.id}"),
-          const SizedBox(height: 8),
-          Text(
-            "Click or Scan",
-            style: const TextStyle(
-              color: AppColor.white,
-              fontSize: 14.0,
-              height: 1.5,
-            ),
-            textAlign: TextAlign.center,
-          ),
           const SizedBox(height: 16),
         ],
       ),
