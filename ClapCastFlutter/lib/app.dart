@@ -9,6 +9,9 @@ import 'package:clapcastflutter/starting/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'dashboard/presentation/dashboard_screen.dart';
 import 'detailed/presentation/detailed_screen.dart';
 
@@ -26,6 +29,16 @@ class MyApp extends StatelessWidget {
 
       ],
       child: MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate, // Nos traductions
+          GlobalMaterialLocalizations.delegate, // Traduit les éléments de base d'Android
+          GlobalWidgetsLocalizations.delegate, // Gère le sens de lecture (gauche à droite)
+          GlobalCupertinoLocalizations.delegate, // Traduit les éléments de base d'iOS
+        ],
+        supportedLocales: const [
+          Locale('en', ''), // Anglais (par défaut)
+          Locale('fr', ''), // Français
+        ],
         initialRoute: "/",
         routes: {
           "/": (context) => const SplashScreen(),
@@ -34,7 +47,7 @@ class MyApp extends StatelessWidget {
           "/category_screen": (context) => const CategoryScreen(people: [], movies: [], categoryTitle: '',),
           "/detail_screen": (context) => const DetailedScreen(),
         },
-        title: 'Flutter Demo',
+        title: 'ClapCast',
         theme: AppTheme.themeData,
       ),
     );

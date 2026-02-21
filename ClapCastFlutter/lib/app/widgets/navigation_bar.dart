@@ -1,6 +1,7 @@
 import 'package:clapcastflutter/generated/assets.dart';
 import 'package:clapcastflutter/ressources/app_color.dart';
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../ressources/app_dimens.dart';
 
 class NavigationBarFooter extends StatelessWidget {
@@ -15,6 +16,8 @@ class NavigationBarFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return NavigationBar(
         selectedIndex: selectedIndex,
         onDestinationSelected: newDestinationSelected,
@@ -31,15 +34,13 @@ class NavigationBarFooter extends StatelessWidget {
               height: AppImageSize.medium,
               color: AppColor.appContrast,
             ),
-
             selectedIcon: Image.asset(
               Assets.assetsIcMovie,
               width: AppImageSize.medium,
               height: AppImageSize.medium,
               color: AppColor.black,
             ),
-
-            label: 'Explore',
+            label: l10n.navExplore,
           ),
 
           NavigationDestination(
@@ -49,15 +50,13 @@ class NavigationBarFooter extends StatelessWidget {
               height: AppImageSize.medium,
               color: AppColor.appContrast,
             ),
-
             selectedIcon: Image.asset(
               Assets.assetsIcActionKey,
               width: AppImageSize.medium,
               height: AppImageSize.medium,
               color: AppColor.black,
             ),
-
-            label: 'Search',
+            label: l10n.navSearch,
           )
         ],
         backgroundColor: AppColor.black,
