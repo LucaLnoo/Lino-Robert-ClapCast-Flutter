@@ -1,5 +1,6 @@
 import 'package:clapcastflutter/ressources/app_color.dart';
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import 'dart:math' as math;
 import '../../app/model/movie.dart';
 import '../../app/model/person.dart';
@@ -24,12 +25,13 @@ class ContentScrollRowPeople extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return _GenericContentScrollRow<PersonOverview>(
       rowTitle: rowTitle,
       dataList: people,
       onItemClick: onPersonClick,
       onMoreClick: onMoreClick,
-      nameMapper: (item) => item.name ?? "Inconnu",
+      nameMapper: (item) => item.name ?? l10n.unknown,
       imageMapper: (item) => item.profilePathImage ?? "",
     );
   }
@@ -54,12 +56,13 @@ class ContentScrollRowMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return _GenericContentScrollRow<MovieOverview>(
       rowTitle: rowTitle,
       dataList: movies,
       onItemClick: onMovieClick,
       onMoreClick: onMoreClick,
-      nameMapper: (item) => item.title ?? "Inconnu",
+      nameMapper: (item) => item.title ?? l10n.unknown,
       imageMapper: (item) => item.posterPathImage ?? "",
     );
   }
@@ -84,12 +87,13 @@ class ContentScrollRowCast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return _GenericContentScrollRow<PersonOverview>(
       rowTitle: rowTitle,
       dataList: castMembers,
       onItemClick: onPersonClick,
       onMoreClick: onMoreClick,
-      nameMapper: (item) => item.name ?? "Inconnu",
+      nameMapper: (item) => item.name ?? l10n.unknown,
       imageMapper: (item) => item.profilePathImage ?? "",
     );
   }

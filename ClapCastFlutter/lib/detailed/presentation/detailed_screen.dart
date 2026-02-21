@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../../app/widgets/background.dart';
 import '../../app/widgets/base_layout.dart';
 import '../../app/widgets/qr_code.dart';
+import '../../l10n/app_localizations.dart';
 import '../../search/presentation/category_screen.dart';
 import '../domain/detailed_notifier.dart';
 
@@ -45,16 +46,17 @@ class _DetailedScreenState extends State<DetailedScreen> {
   @override
   Widget build(BuildContext context) {
     final notifier = context.watch<DetailedNotifier>();
+    final l10n = AppLocalizations.of(context)!;
 
     return BaseLayout(
       currentIndex: 0,
       child: AppMenuBackground(
-        child: _buildBody(notifier),
+        child: _buildBody(notifier, l10n),
       ),
     );
   }
 
-  Widget _buildBody(DetailedNotifier notifier) {
+  Widget _buildBody(DetailedNotifier notifier, AppLocalizations l10n) {
     if (widget.isAPerson && notifier.person == null) {
       return const Center(
           child: CircularProgressIndicator(color: AppColor.white));
@@ -66,12 +68,12 @@ class _DetailedScreenState extends State<DetailedScreen> {
 
     return SafeArea(
       child: widget.isAPerson
-          ? _buildActorContent(notifier.person!)
-          : _buildMovieContent(notifier.movie!),
+          ? _buildActorContent(notifier.person!, l10n)
+          : _buildMovieContent(notifier.movie!, l10n),
     );
   }
 
-  Widget _buildActorContent(PersonDetails person) {
+  Widget _buildActorContent(PersonDetails person, AppLocalizations l10n) {
     final List<MovieOverview>? moviesList = person.knownForMovies?.cast.map((movie) {
       return MovieOverview(
         id: movie.id,
@@ -88,14 +90,14 @@ class _DetailedScreenState extends State<DetailedScreen> {
       child: Column(
         children: [
           SectionBar(
-              sectionName: person.name ?? "Unknown",
+              sectionName: person.name ?? l10n.unknown,
               onBackClick: () => Navigator.pop(context)
           ),
           _buildImage(person.profilePathImage),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              person.biography ?? "No biography",
+              person.biography ?? l10n.noBiography,
               style: const TextStyle(
                 color: AppColor.white,
                 fontSize: 14.0,
@@ -107,10 +109,10 @@ class _DetailedScreenState extends State<DetailedScreen> {
             ),
           ),
           ContentScrollRowMovie(
-            rowTitle: "Known for:",
+            rowTitle: l10n.knownFor,
             movies: moviesList,
             onMovieClick: (movie) => _navigateToDetail(movie.id, false),
-            onMoreClick: (movies) => _navigateToCategory("Distribution", people: [], movies: movies),
+            onMoreClick: (movies) => _navigateToCategory(l10n.distribution, people: [], movies: movies),
           ),
           const SizedBox(height: 16),
           QrCodeClapCast(url: "https://www.themoviedb.org/person/${person.id}"),
@@ -120,7 +122,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
     );
   }
 
-  Widget _buildMovieContent(MovieDetails movie) {
+  Widget _buildMovieContent(MovieDetails movie, AppLocalizations l10n) {
     final List<PersonOverview>? castList = movie.distribution?.cast.map((castMember) {
       return PersonOverview(
         id: castMember.personId,
@@ -135,14 +137,14 @@ class _DetailedScreenState extends State<DetailedScreen> {
       child: Column(
         children: [
           SectionBar(
-              sectionName: movie.title ?? "Unknown",
+              sectionName: movie.title ?? l10n.unknown,
               onBackClick: () => Navigator.pop(context)
           ),
           _buildImage(movie.posterPathImage),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              movie.overview ?? "No description",
+              movie.overview ?? l10n.noDescription,
               style: const TextStyle(
                 color: AppColor.white,
                 fontSize: 14.0,
@@ -154,10 +156,10 @@ class _DetailedScreenState extends State<DetailedScreen> {
             ),
           ),
           ContentScrollRowCast(
-            rowTitle: "Distribution",
+            rowTitle: l10n.distribution,
             castMembers: castList,
             onPersonClick: (person) => _navigateToDetail(person.id, true),
-            onMoreClick: (people) => _navigateToCategory("Distribution", people: people, movies: []),
+            onMoreClick: (people) => _navigateToCategory(l10n.distribution, people: people, movies: []),
           ),
           const SizedBox(height: 16),
           QrCodeClapCast(url: "https://www.themoviedb.org/movie/${movie.id}"),

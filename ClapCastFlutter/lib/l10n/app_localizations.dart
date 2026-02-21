@@ -181,6 +181,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Only French'**
   String get filterOnlyFrench;
+
+  /// No description provided for @actorSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Actors Selection'**
+  String get actorSelection;
+
+  /// No description provided for @mostSearchedMaleActor.
+  ///
+  /// In en, this message translates to:
+  /// **'Most searched male actor'**
+  String get mostSearchedMaleActor;
+
+  /// No description provided for @mostSearchedFemaleActor.
+  ///
+  /// In en, this message translates to:
+  /// **'Most searched female actor'**
+  String get mostSearchedFemaleActor;
+
+  /// No description provided for @playedInFrench.
+  ///
+  /// In en, this message translates to:
+  /// **'Played in French'**
+  String get playedInFrench;
+
+  /// No description provided for @playedInEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'Played in English'**
+  String get playedInEnglish;
+
+  /// No description provided for @maleActor.
+  ///
+  /// In en, this message translates to:
+  /// **'Male Actor'**
+  String get maleActor;
+
+  /// No description provided for @femaleActor.
+  ///
+  /// In en, this message translates to:
+  /// **'Female Actor'**
+  String get femaleActor;
+
+  /// No description provided for @movieSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies Selection'**
+  String get movieSelection;
+
+  /// No description provided for @popularMovies.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular Movies'**
+  String get popularMovies;
+
+  /// No description provided for @movies2020s.
+  ///
+  /// In en, this message translates to:
+  /// **'2020\'s Movies'**
+  String get movies2020s;
+
+  /// No description provided for @movies2000s.
+  ///
+  /// In en, this message translates to:
+  /// **'2000\'s Movies'**
+  String get movies2000s;
+
+  /// No description provided for @movies1990s.
+  ///
+  /// In en, this message translates to:
+  /// **'1990\'s Movies'**
+  String get movies1990s;
+
+  /// No description provided for @frenchMovies.
+  ///
+  /// In en, this message translates to:
+  /// **'French Movies'**
+  String get frenchMovies;
+
+  /// No description provided for @englishMovies.
+  ///
+  /// In en, this message translates to:
+  /// **'English Movies'**
+  String get englishMovies;
+
+  /// No description provided for @noBiography.
+  ///
+  /// In en, this message translates to:
+  /// **'No biography'**
+  String get noBiography;
+
+  /// No description provided for @knownFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Known for:'**
+  String get knownFor;
+
+  /// No description provided for @noDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'No description'**
+  String get noDescription;
+
+  /// No description provided for @distribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Distribution'**
+  String get distribution;
 }
 
 class _AppLocalizationsDelegate

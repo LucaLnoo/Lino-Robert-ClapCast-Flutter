@@ -49,4 +49,58 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get filterOnlyFrench => 'Français';
+
+  @override
+  String get actorSelection => 'Sélection d\'acteurs';
+
+  @override
+  String get mostSearchedMaleActor => 'Acteur le plus recherché';
+
+  @override
+  String get mostSearchedFemaleActor => 'Actrice la plus recherchée';
+
+  @override
+  String get playedInFrench => 'A joué en français';
+
+  @override
+  String get playedInEnglish => 'A joué en anglais';
+
+  @override
+  String get maleActor => 'Acteurs';
+
+  @override
+  String get femaleActor => 'Actrices';
+
+  @override
+  String get movieSelection => 'Sélection de films';
+
+  @override
+  String get popularMovies => 'Films populaires';
+
+  @override
+  String get movies2020s => 'Films des années 2020';
+
+  @override
+  String get movies2000s => 'Films des années 2000';
+
+  @override
+  String get movies1990s => 'Films des années 1990';
+
+  @override
+  String get frenchMovies => 'Films français';
+
+  @override
+  String get englishMovies => 'Films anglais';
+
+  @override
+  String get noBiography => 'Aucune biographie disponible';
+
+  @override
+  String get knownFor => 'Connu(e) pour :';
+
+  @override
+  String get noDescription => 'Aucune description disponible';
+
+  @override
+  String get distribution => 'Distribution';
 }
