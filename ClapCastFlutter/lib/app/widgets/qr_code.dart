@@ -51,7 +51,7 @@ class QrCodeClapCast extends StatelessWidget {
             l10n.clickOrScan,
             style: const TextStyle(
               color: AppColor.white,
-              fontSize: AppText.medium_12,
+              fontSize: AppText.medium,
               height: 1.5,
             ),
             textAlign: TextAlign.center,
