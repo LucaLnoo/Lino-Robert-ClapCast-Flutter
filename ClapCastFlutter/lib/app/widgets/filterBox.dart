@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../ressources/app_color.dart';
+import '../../ressources/app_dimens.dart';
 import 'button.dart';
 
 class FilterWidget extends StatelessWidget {
@@ -45,17 +46,17 @@ class FilterWidget extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: Container(
-        width: 200.0,
+        width: AppOverlaySize.filterMenuWidth,
         decoration: BoxDecoration(
           color: Colors.black,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(AppRadius.medium),
           border: Border.all(
             color: Colors.white,
-            width: 1.0,
+            width: AppStickBar.verytiny,
           ),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(AppRadius.medium),
           child: _FilterWidgetContent(l10n),
         ),
       ),
@@ -216,7 +217,7 @@ class _CustomFilterChip extends StatelessWidget {
           text,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 14.0,
+            fontSize: AppText.medium_12,
             fontWeight: FontWeight.bold,
           ),
         ),

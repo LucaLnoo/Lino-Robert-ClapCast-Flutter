@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../ressources/app_color.dart';
+import '../../ressources/app_dimens.dart';
 import 'imageApi.dart';
 
 class MediaCardButton extends StatelessWidget {
@@ -25,10 +26,10 @@ class MediaCardButton extends StatelessWidget {
         children: [
           Material(
             color: Colors.transparent,
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(AppRadius.small),
             clipBehavior: Clip.hardEdge,
             child: SizedBox(
-              height: 130.0,
+              height: AppOffersSize.mediumHeight,
               width: double.infinity,
               child: ImageApi(
                 imagePath: imagePath,
@@ -37,7 +38,7 @@ class MediaCardButton extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 6.0),
+          const SizedBox(height: AppCircleSize.tiny),
 
           Text(
             text,
@@ -47,7 +48,7 @@ class MediaCardButton extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 12.0,
+              fontSize: AppText.medium_12,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -78,7 +79,10 @@ class ToggleButton extends StatelessWidget {
       child: InkWell(
         onTap: () => onCheckedChange(!isActive),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppMargin.small,
+              vertical: AppMargin.tiny
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -86,7 +90,7 @@ class ToggleButton extends StatelessWidget {
                 text,
                 style: const TextStyle(
                   color: AppColor.appContrast,
-                  fontSize: 16.0,
+                  fontSize: AppText.medium,
                 ),
               ),
 

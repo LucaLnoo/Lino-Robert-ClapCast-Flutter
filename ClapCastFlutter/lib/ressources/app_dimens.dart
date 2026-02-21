@@ -30,6 +30,22 @@ class AppMargin {
   static const  monthlyScorePageViewHeight = 200.0;
 }
 
+class AppQrCodeSize {
+  static const standard = 200.0;
+}
+
+class AppOverlaySize {
+  static const filterMenuWidth = 200.0;
+}
+
+class AppHeaderSize {
+  static const logoContainerHeight = 100.0;
+  static const logoImageSize = 95.0;
+  static const sectionBarHeight = 40.0;
+  static const searchBarHeight = 55.0;
+  static const tabBarHeight = 48.0;
+}
+
 class AppText {
   static const veryTiny = 2.0;
   static const tiny = 4.0;
@@ -41,6 +57,10 @@ class AppText {
   static const xxlarge = 40.0;
   static const xxxlarge = 48.0;
   static const xxxxlarge = 56.0;
+
+  static const headerTitle = 17.0;
+  static const filterLabel = 10.0;
+  static const sectionTitle = 24.0;
 }
 
 class AppDimension {

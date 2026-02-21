@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/assets.dart';
 import '../../ressources/app_color.dart';
+import '../../ressources/app_dimens.dart';
 
 class QrCodeClapCast extends StatelessWidget {
   final String url;
@@ -33,7 +34,7 @@ class QrCodeClapCast extends StatelessWidget {
           QrImageView(
             data: url,
             version: QrVersions.auto,
-            size: 200.0,
+            size: AppQrCodeSize.standard,
 
             eyeStyle: const QrEyeStyle(
               eyeShape: QrEyeShape.square,
@@ -45,12 +46,12 @@ class QrCodeClapCast extends StatelessWidget {
               color: AppColor.appContrast,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppMargin.small),
           Text(
             l10n.clickOrScan,
             style: const TextStyle(
               color: AppColor.white,
-              fontSize: 14.0,
+              fontSize: AppText.medium_12,
               height: 1.5,
             ),
             textAlign: TextAlign.center,

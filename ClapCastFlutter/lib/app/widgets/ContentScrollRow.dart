@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import 'dart:math' as math;
 import '../../app/model/movie.dart';
 import '../../app/model/person.dart';
+import '../../ressources/app_dimens.dart';
 import 'button.dart';
 
 // ==============================================================================
@@ -127,7 +128,10 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 12.0),
+          padding: const EdgeInsets.only(left: AppMargin.tiny,
+            right: AppMargin.tiny,
+            top: AppMargin.medium_12
+          ),
           child: Row(
             children: [
               Expanded(
@@ -136,7 +140,7 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColor.white,
-                    fontSize: 14.0,
+                    fontSize: AppText.medium_12,
                   ),
                 ),
               ),
@@ -146,8 +150,8 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                   angle: math.pi,
                   child: Image.asset(
                     "assets/ic_arrow_back.png",
-                    width: 14,
-                    height: 14,
+                    width: AppIconSize.small,
+                    height: AppIconSize.small,
                     color: AppColor.white,
                   ),
                 ),
@@ -159,13 +163,13 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
           height: 175.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppMargin.small),
             itemCount: dataList!.length,
             itemBuilder: (context, index) {
               final item = dataList![index];
               return Container(
-                width: 125.0,
-                margin: const EdgeInsets.only(right: 8.0),
+                width: AppImageSize.xxxxlarge,
+                margin: const EdgeInsets.only(right: AppMargin.small),
                 child: _AnimatedItem(
                   index: index,
                   child: MediaCardButton(

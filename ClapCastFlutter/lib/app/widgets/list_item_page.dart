@@ -3,6 +3,7 @@ import '../../l10n/app_localizations.dart';
 import '../../app/widgets/background.dart';
 import '../../app/widgets/header.dart';
 import '../../ressources/app_color.dart';
+import '../../ressources/app_dimens.dart';
 import '../model/movie.dart';
 import '../model/person.dart';
 import 'filterBox.dart';
@@ -118,7 +119,7 @@ class _MediaListLayoutState extends State<MediaListLayout> {
                           ),
                         ],
 
-                        const SliverToBoxAdapter(child: SizedBox(height: 20)),
+                        const SliverToBoxAdapter(child: SizedBox(height: AppMargin.large)),
                       ],
                     ),
                   ),
@@ -158,7 +159,12 @@ class _MediaListLayoutState extends State<MediaListLayout> {
   SliverToBoxAdapter _buildSectionHeader(String title) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+        padding: const EdgeInsets.fromLTRB(
+          AppMargin.medium,
+          AppMargin.large,
+          AppMargin.medium,
+          AppMargin.small
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -167,7 +173,7 @@ class _MediaListLayoutState extends State<MediaListLayout> {
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: AppColor.appContrast,
-                fontSize: 24,
+                fontSize: AppText.large,
               ),
             ),
             const Divider(color: AppColor.appContrast, thickness: 1),
@@ -187,8 +193,8 @@ class _MediaListLayoutState extends State<MediaListLayout> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 0.62,
-        crossAxisSpacing: 8.0,
-        mainAxisSpacing: 16.0,
+        crossAxisSpacing: AppDimension.small,
+        mainAxisSpacing: AppDimension.medium,
       ),
     );
   }

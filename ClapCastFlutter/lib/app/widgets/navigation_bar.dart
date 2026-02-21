@@ -30,14 +30,14 @@ class NavigationBarFooter extends StatelessWidget {
           NavigationDestination(
             icon: Image.asset(
               Assets.assetsIcMovie,
-              width: AppImageSize.medium,
-              height: AppImageSize.medium,
+              width: AppIconSize.medium,
+              height: AppIconSize.medium,
               color: AppColor.appContrast,
             ),
             selectedIcon: Image.asset(
               Assets.assetsIcMovie,
-              width: AppImageSize.medium,
-              height: AppImageSize.medium,
+              width: AppIconSize.medium,
+              height: AppIconSize.medium,
               color: AppColor.black,
             ),
             label: l10n.navExplore,
@@ -46,14 +46,14 @@ class NavigationBarFooter extends StatelessWidget {
           NavigationDestination(
             icon: Image.asset(
               Assets.assetsIcActionKey,
-              width: AppImageSize.medium,
-              height: AppImageSize.medium,
+              width: AppIconSize.medium,
+              height: AppIconSize.medium,
               color: AppColor.appContrast,
             ),
             selectedIcon: Image.asset(
               Assets.assetsIcActionKey,
-              width: AppImageSize.medium,
-              height: AppImageSize.medium,
+              width: AppIconSize.medium,
+              height: AppIconSize.medium,
               color: AppColor.black,
             ),
             label: l10n.navSearch,

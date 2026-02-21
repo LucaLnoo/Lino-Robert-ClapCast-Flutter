@@ -11,7 +11,7 @@ class HeaderLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 100.0,
+      height: AppHeaderSize.logoContainerHeight,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -27,8 +27,8 @@ class HeaderLogo extends StatelessWidget {
       child: Center(
         child: Image.asset(
           Assets.assetsIcLogo,
-          width: 95.0,
-          height: 95.0,
+          width: AppHeaderSize.logoImageSize,
+          height: AppHeaderSize.logoImageSize,
           fit: BoxFit.contain,
         ),
       ),
@@ -50,11 +50,11 @@ class SectionBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 40.0,
+      height: AppHeaderSize.sectionBarHeight,
       color: Colors.black,
       alignment: Alignment.center,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: AppMargin.small),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -63,8 +63,8 @@ class SectionBar extends StatelessWidget {
               icon: Image.asset(
                 Assets.assetsIcArrowBack,
                 color: Colors.white,
-                width: 24,
-                height: 24,
+                width: AppIconSize.medium,
+                height: AppIconSize.medium,
               ),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
@@ -76,13 +76,13 @@ class SectionBar extends StatelessWidget {
               sectionName,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Colors.white,
-                fontSize: 17.0,
+                fontSize: AppText.headerTitle,
               ),
             ),
 
             const Spacer(flex: 1),
 
-            const SizedBox(width: 48.0, height: 48.0),
+            const SizedBox(width: AppIconSize.xxxlarge, height: AppIconSize.xxxlarge),
           ],
         ),
       ),
@@ -146,7 +146,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         children: [
           Expanded(
             child: Container(
-              height: 55.0,
+              height: AppHeaderSize.searchBarHeight,
               decoration: BoxDecoration(
                 color: const Color(0xFF2A2A2A),
                 borderRadius: BorderRadius.circular(AppRadius.large),
@@ -163,7 +163,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                         hintText: l10n.searchHint,
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: AppMargin.medium),
                       ),
                       cursorColor: Colors.white,
                     ),
@@ -173,8 +173,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     icon: Image.asset(
                       Assets.assetsIcSearch,
                       color: AppColor.appContrast,
-                      width: 24,
-                      height: 24,
+                      width: AppIconSize.medium,
+                      height: AppIconSize.medium,
                     ),
                   ),
                 ],
@@ -182,29 +182,29 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             ),
           ),
 
-          const SizedBox(width: 8.0),
+          const SizedBox(width: AppMargin.small),
 
           GestureDetector(
             onTap: () {
               widget.onFilterToggle(!widget.isFilterOpen);
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: AppMargin.tiny),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
                     Assets.assetsIcFilter,
                     color: AppColor.appContrast,
-                    width: 24,
-                    height: 24,
+                    width: AppIconSize.medium,
+                    height: AppIconSize.medium,
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: AppMargin.veryTiny),
                   Text(
                     l10n.filter,
                     style: const TextStyle(
                         color: AppColor.appContrast,
-                        fontSize: 10,
+                        fontSize: AppText.filterLabel,
                         fontWeight: FontWeight.normal
                     ),
                   )
@@ -240,7 +240,7 @@ class NavigationBarHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: 48.0,
+            height: AppHeaderSize.tabBarHeight,
             child: Row(
               children: List.generate(tabs.length, (index) {
                 return Expanded(
@@ -251,7 +251,7 @@ class NavigationBarHeader extends StatelessWidget {
                         tabs[index],
                         style: TextStyle(
                           color: const Color(0xFFF4E1D2),
-                          fontSize: 16.0,
+                          fontSize: AppText.medium,
                           fontWeight: selectedIndex == index
                               ? FontWeight.bold
                               : FontWeight.normal,
@@ -265,7 +265,7 @@ class NavigationBarHeader extends StatelessWidget {
           ),
 
           SizedBox(
-            height: 3.0,
+            height: AppStickBar.small,
             child: Stack(
               children: [
                 Container(color: const Color(0xFF2E2E2E)),

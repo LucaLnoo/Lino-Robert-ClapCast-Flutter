@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
+import '../../ressources/app_dimens.dart';
 
 class ImageApi extends StatelessWidget {
   final String imagePath;
@@ -11,7 +12,7 @@ class ImageApi extends StatelessWidget {
   const ImageApi({
     super.key,
     required this.imagePath,
-    this.borderRadius = 16.0,
+    this.borderRadius = AppRadius.medium,
     this.width = 500,
     this.description,
     this.height,
@@ -42,7 +43,7 @@ class ImageApi extends StatelessWidget {
           return Container(
             color: Colors.grey[900],
             child: const Center(
-              child: CircularProgressIndicator(strokeWidth: 2),
+              child: CircularProgressIndicator(strokeWidth: AppDimension.veryTiny),
             ),
           );
         },
