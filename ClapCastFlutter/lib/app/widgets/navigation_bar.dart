@@ -51,7 +51,7 @@ class NavigationBarFooter extends StatelessWidget {
             ),
 
             selectedIcon: Image.asset(
-              Assets.assetsIcSearch,
+              Assets.assetsIcActionKey,
               width: AppImageSize.medium,
               height: AppImageSize.medium,
               color: AppColor.black,
