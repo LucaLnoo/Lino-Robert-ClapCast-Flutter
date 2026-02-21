@@ -140,7 +140,7 @@ class _GenericContentScrollRow<T> extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColor.white,
-                    fontSize: AppText.medium_12,
+                    fontSize: AppText.medium,
                   ),
                 ),
               ),
