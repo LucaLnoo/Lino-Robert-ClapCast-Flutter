@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../ressources/app_color.dart';
 import 'button.dart';
 
@@ -40,6 +41,7 @@ class FilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Material(
       color: Colors.transparent,
       child: Container(
@@ -54,18 +56,18 @@ class FilterWidget extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16.0),
-          child: _FilterWidgetContent(),
+          child: _FilterWidgetContent(l10n),
         ),
       ),
     );
   }
 
-  Widget _FilterWidgetContent() {
+  Widget _FilterWidgetContent(AppLocalizations l10n) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ToggleButton(
-          text: "Actors",
+          text: l10n.actors,
           isActive: isActorFilter,
           onCheckedChange: onActorFilterChange,
         ),
@@ -89,7 +91,7 @@ class FilterWidget extends StatelessWidget {
         ),
 
         ToggleButton(
-          text: "Movies",
+          text: l10n.movies,
           isActive: isMovieFilter,
           onCheckedChange: onMovieFilterChange,
         ),
@@ -113,7 +115,7 @@ class FilterWidget extends StatelessWidget {
         ),
 
         ToggleButton(
-          text: "Only French",
+          text: l10n.filterOnlyFrench,
           isActive: onlyFrenchFilter,
           onCheckedChange: onOnlyFrenchFilter,
         ),
@@ -133,6 +135,7 @@ class _ActorFilterContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16.0,
@@ -143,19 +146,19 @@ class _ActorFilterContent extends StatelessWidget {
         children: [
           _CustomFilterChip(
             selected: selectedGender == 0,
-            text: "All",
+            text: l10n.filterAll,
             onClick: () => onGenderSelected(0),
           ),
           const SizedBox(width: 8),
           _CustomFilterChip(
             selected: selectedGender == 1,
-            text: "F",
+            text: l10n.filterFemale,
             onClick: () => onGenderSelected(1),
           ),
           const SizedBox(width: 8),
           _CustomFilterChip(
             selected: selectedGender == 2,
-            text: "M",
+            text: l10n.filterMale,
             onClick: () => onGenderSelected(2),
           ),
         ],
@@ -175,10 +178,11 @@ class _MovieFilterContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(left: 16.0),
       child: ToggleButton(
-        text: "Recent",
+        text: l10n.filterRecent,
         isActive: isRecentOnly,
         onCheckedChange: onRecentChange,
         scale: 0.7,

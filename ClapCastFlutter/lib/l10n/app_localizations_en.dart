@@ -13,4 +13,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navSearch => 'Search';
+
+  @override
+  String get actors => 'Actors';
+
+  @override
+  String get movies => 'Movies';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get clickOrScan => 'Click or Scan';
+
+  @override
+  String get movieImageFallback => 'Movie image';
+
+  @override
+  String get searchHint => 'Search...';
+
+  @override
+  String get filter => 'Filter';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterFemale => 'F';
+
+  @override
+  String get filterMale => 'M';
+
+  @override
+  String get filterRecent => 'Recent';
+
+  @override
+  String get filterOnlyFrench => 'Only French';
 }

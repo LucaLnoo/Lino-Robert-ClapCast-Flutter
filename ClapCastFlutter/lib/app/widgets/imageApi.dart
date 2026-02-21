@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 
 class ImageApi extends StatelessWidget {
   final String imagePath;
@@ -18,6 +19,9 @@ class ImageApi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final l10n = AppLocalizations.of(context)!;
+
     final imageUrl = "https://image.tmdb.org/t/p/w$width$imagePath";
 
     return ClipRRect(
@@ -31,7 +35,7 @@ class ImageApi extends StatelessWidget {
 
         fit: BoxFit.cover,
 
-        semanticLabel: description ?? "Image du film",
+        semanticLabel: description ?? l10n.movieImageFallback,
 
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;

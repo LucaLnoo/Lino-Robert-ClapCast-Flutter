@@ -1,5 +1,17 @@
 {
   "@@locale": "en",
   "navExplore": "Explore",
-  "navSearch": "Search"
+  "navSearch": "Search",
+  "actors": "Actors",
+  "movies": "Movies",
+  "unknown": "Unknown",
+  "clickOrScan": "Click or Scan",
+  "movieImageFallback": "Movie image",
+  "searchHint": "Search...",
+  "filter": "Filter",
+  "filterAll": "All",
+  "filterFemale": "F",
+  "filterMale": "M",
+  "filterRecent": "Recent",
+  "filterOnlyFrench": "Only French"
 }

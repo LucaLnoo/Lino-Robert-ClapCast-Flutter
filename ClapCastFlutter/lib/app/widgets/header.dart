@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../l10n/app_localizations.dart';
 import '../../generated/assets.dart';
 import '../../ressources/app_color.dart';
 import '../../ressources/app_dimens.dart';
@@ -137,6 +137,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: AppMargin.medium, vertical: AppMargin.small),
@@ -158,11 +159,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                       onChanged: widget.onQueryChange,
                       onSubmitted: (_) => widget.onSearchClick(),
                       style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                        hintText: "Rechercher...",
-                        hintStyle: TextStyle(color: Colors.grey),
+                      decoration: InputDecoration(
+                        hintText: l10n.searchHint,
+                        hintStyle: const TextStyle(color: Colors.grey),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                       ),
                       cursorColor: Colors.white,
                     ),
@@ -199,9 +200,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     height: 24,
                   ),
                   const SizedBox(height: 2),
-                  const Text(
-                    "Filtre",
-                    style: TextStyle(
+                  Text(
+                    l10n.filter,
+                    style: const TextStyle(
                         color: AppColor.appContrast,
                         fontSize: 10,
                         fontWeight: FontWeight.normal
@@ -229,7 +230,8 @@ class NavigationBarHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabs = ["Acteurs", "Films"];
+    final l10n = AppLocalizations.of(context)!;
+    final tabs = [l10n.actors, l10n.movies];
 
     return Container(
       width: double.infinity,

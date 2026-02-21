@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../app/widgets/background.dart';
 import '../../app/widgets/header.dart';
 import '../../ressources/app_color.dart';
@@ -43,6 +44,7 @@ class _MediaListLayoutState extends State<MediaListLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final bool isApiSearch = widget.onSearchQueryChanged != null;
 
     final filteredPeople = _filterPeopleLocally(applyTextFilter: !isApiSearch);
@@ -85,13 +87,13 @@ class _MediaListLayoutState extends State<MediaListLayout> {
                     child: CustomScrollView(
                       slivers: [
                         if (_isActorFilter && filteredPeople.isNotEmpty) ...[
-                          _buildSectionHeader("Acteurs"),
+                          _buildSectionHeader(l10n.actors),
                           _buildGrid(
                             itemCount: filteredPeople.length,
                             itemBuilder: (context, index) {
                               final person = filteredPeople[index];
                               return MediaCardButton(
-                                text: person.name ?? "Inconnu",
+                                text: person.name ?? l10n.unknown,
                                 imagePath: person.profilePathImage ?? "",
                                 onClick: () =>
                                     widget.onContentClick(person.id, true),
@@ -101,13 +103,13 @@ class _MediaListLayoutState extends State<MediaListLayout> {
                         ],
 
                         if (_isMovieFilter && filteredMovies.isNotEmpty) ...[
-                          _buildSectionHeader("Films"),
+                          _buildSectionHeader(l10n.movies),
                           _buildGrid(
                             itemCount: filteredMovies.length,
                             itemBuilder: (context, index) {
                               final movie = filteredMovies[index];
                               return MediaCardButton(
-                                text: movie.title ?? "Inconnu",
+                                text: movie.title ?? l10n.unknown,
                                 imagePath: movie.posterPathImage ?? "",
                                 onClick: () =>
                                     widget.onContentClick(movie.id, false),

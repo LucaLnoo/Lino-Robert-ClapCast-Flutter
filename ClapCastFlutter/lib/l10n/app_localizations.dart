@@ -109,6 +109,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search'**
   String get navSearch;
+
+  /// No description provided for @actors.
+  ///
+  /// In en, this message translates to:
+  /// **'Actors'**
+  String get actors;
+
+  /// No description provided for @movies.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies'**
+  String get movies;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @clickOrScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Click or Scan'**
+  String get clickOrScan;
+
+  /// No description provided for @movieImageFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie image'**
+  String get movieImageFallback;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search...'**
+  String get searchHint;
+
+  /// No description provided for @filter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filter;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @filterFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'F'**
+  String get filterFemale;
+
+  /// No description provided for @filterMale.
+  ///
+  /// In en, this message translates to:
+  /// **'M'**
+  String get filterMale;
+
+  /// No description provided for @filterRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get filterRecent;
+
+  /// No description provided for @filterOnlyFrench.
+  ///
+  /// In en, this message translates to:
+  /// **'Only French'**
+  String get filterOnlyFrench;
 }
 
 class _AppLocalizationsDelegate

@@ -1,5 +1,17 @@
 {
   "@@locale": "fr",
   "navExplore": "Explorer",
-  "navSearch": "Rechercher"
+  "navSearch": "Rechercher",
+  "actors": "Acteurs",
+  "movies": "Films",
+  "unknown": "Inconnu",
+  "clickOrScan": "Cliquez ou Scannez",
+  "movieImageFallback": "Image du film",
+  "searchHint": "Rechercher...",
+  "filter": "Filtre",
+  "filterAll": "Tous",
+  "filterFemale": "F",
+  "filterMale": "H",
+  "filterRecent": "Récents",
+  "filterOnlyFrench": "Français"
 }

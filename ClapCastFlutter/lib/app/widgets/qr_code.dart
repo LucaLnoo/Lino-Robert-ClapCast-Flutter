@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,6 +19,8 @@ class QrCodeClapCast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final l10n = AppLocalizations.of(context)!;
 
     return GestureDetector(
 
@@ -44,7 +47,7 @@ class QrCodeClapCast extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "Click or Scan",
+            l10n.clickOrScan,
             style: const TextStyle(
               color: AppColor.white,
               fontSize: 14.0,
