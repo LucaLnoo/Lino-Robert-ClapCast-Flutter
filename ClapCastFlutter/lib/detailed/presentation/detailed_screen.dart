@@ -12,6 +12,7 @@ import '../../app/widgets/background.dart';
 import '../../app/widgets/base_layout.dart';
 import '../../app/widgets/qr_code.dart';
 import '../../l10n/app_localizations.dart';
+import '../../ressources/app_dimens.dart';
 import '../../search/presentation/category_screen.dart';
 import '../domain/detailed_notifier.dart';
 
@@ -86,7 +87,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
     }).toList();
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: AppMargin.medium),
       child: Column(
         children: [
           SectionBar(
@@ -95,12 +96,12 @@ class _DetailedScreenState extends State<DetailedScreen> {
           ),
           _buildImage(person.profilePathImage),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppMargin.medium),
             child: Text(
               person.biography ?? l10n.noBiography,
               style: const TextStyle(
                 color: AppColor.white,
-                fontSize: 14.0,
+                fontSize: AppText.medium_12,
                 height: 1.5,
               ),
               maxLines: 4,
@@ -114,9 +115,9 @@ class _DetailedScreenState extends State<DetailedScreen> {
             onMovieClick: (movie) => _navigateToDetail(movie.id, false),
             onMoreClick: (movies) => _navigateToCategory(l10n.distribution, people: [], movies: movies),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppMargin.medium),
           QrCodeClapCast(url: "https://www.themoviedb.org/person/${person.id}"),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppMargin.medium),
         ],
       ),
     );
@@ -133,7 +134,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
     }).toList();
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: AppMargin.large),
       child: Column(
         children: [
           SectionBar(
@@ -142,12 +143,12 @@ class _DetailedScreenState extends State<DetailedScreen> {
           ),
           _buildImage(movie.posterPathImage),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppMargin.medium),
             child: Text(
               movie.overview ?? l10n.noDescription,
               style: const TextStyle(
                 color: AppColor.white,
-                fontSize: 14.0,
+                fontSize: AppText.medium_12,
                 height: 1.5,
               ),
               maxLines: 4,
@@ -161,9 +162,9 @@ class _DetailedScreenState extends State<DetailedScreen> {
             onPersonClick: (person) => _navigateToDetail(person.id, true),
             onMoreClick: (people) => _navigateToCategory(l10n.distribution, people: people, movies: []),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppMargin.medium),
           QrCodeClapCast(url: "https://www.themoviedb.org/movie/${movie.id}"),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppMargin.medium),
         ],
       ),
     );
@@ -171,7 +172,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
 
   Widget _buildImage(String? path) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: AppMargin.medium),
 
       child: Center(
         child: FractionallySizedBox(

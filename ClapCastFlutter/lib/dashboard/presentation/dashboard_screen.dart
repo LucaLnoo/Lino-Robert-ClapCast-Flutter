@@ -10,6 +10,7 @@ import '../../app/widgets/base_layout.dart';
 import '../../app/widgets/background.dart';
 import '../../detailed/presentation/detailed_screen.dart';
 import '../../l10n/app_localizations.dart';
+import '../../ressources/app_dimens.dart';
 import '../../search/presentation/category_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -75,7 +76,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         _buildActorRow(l10n.playedInEnglish, allPeople.where((person) => person.knownForMovies.any((m) => m.language == "en")).toList()..shuffle()),
         _buildActorRow(l10n.maleActor, allPeople.where((person) => person.gender == 2).toList()..shuffle()),
         _buildActorRow(l10n.femaleActor, allPeople.where((p) => p.gender == 1).toList()..shuffle()),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppMargin.small),
       ],
     );
   }
@@ -93,7 +94,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         _buildMovieRow(l10n.movies1990s, allMovies.where((movie) => (movie.releaseYear ?? 0) >= 1990 && (movie.releaseYear ?? 0) < 2000).toList()..shuffle()),
         _buildMovieRow(l10n.frenchMovies, allMovies.where((movie) => movie.language == "fr").toList()..shuffle()),
         _buildMovieRow(l10n.englishMovies, allMovies.where((movie) => movie.language == "en").toList()..shuffle()),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppMargin.small),
       ],
     );
   }
